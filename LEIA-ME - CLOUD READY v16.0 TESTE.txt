@@ -1,0 +1,16 @@
+C4U APP v16.0 - CLOUD READY TESTE
+
+Objetivo: executar o C4U em um servidor Linux/AWS Lightsail sem depender de localhost ou IP da rede local.
+
+Variáveis suportadas:
+- PORT: porta do Node.js (padrão 3000)
+- HOST: endereço de escuta (padrão 0.0.0.0)
+- PUBLIC_BASE_URL: endereço público oficial, por exemplo https://sistema.exemplo.com.br
+- C4U_DATA_DIR: diretório persistente do banco db.json
+- C4U_BACKUP_DIR: diretório persistente dos backups
+
+Para teste direto no Lightsail:
+  npm install --omit=dev
+  npm run start:cloud
+
+Atenção: esta ainda é uma versão de homologação. O banco continua em JSON e as sessões permanecem em memória.

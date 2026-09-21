@@ -1,0 +1,45 @@
+C4U APP v16.0.6 TESTE — IRIS DIÁRIA / ÁREA PESSOAL / COMUNICAÇÃO / MAPAS
+Base: C4U APP v16.0.5 TESTE. Entrega para homologação interna. NÃO É HOMOLOGAÇÃO DE PRODUÇÃO.
+
+FUNÇÕES ADICIONADAS
+1. IRIS de boas-vindas: ao entrar, mostra resumo individual de mensagens/conversas não lidas, caixa de entrada, follow-ups, orçamentos em aberto, alterações solicitadas por cliente, pedidos próximos/vencidos, tarefas, lembretes, eventos e notificações. Resumo filtrado conforme usuário e permissões; números reais da base, não ilustrativos. Exibe no máximo uma vez por sessão de navegador; pode desativar em Meu Perfil. Os indicadores levam à área original. Não existe integração de IA externa nova nesta versão.
+2. Minha central: resumo pessoal sob demanda com atalhos, métricas vinculadas à conta e acesso ao fechamento do expediente.
+3. Fechamento do expediente: resumo sob demanda das tarefas/pedidos concluídos hoje, orçamentos criados, tarefas e lembretes em aberto e compromissos de amanhã. Não há envio automático programado nem e-mails.
+4. Meu Perfil: editar nome, e-mail, foto PNG/JPG/WebP de até 280 KB, disponibilidade, senha (confirmando a atual) e preferência de abertura da IRIS. Login, função e permissões NÃO são editáveis por quem acessa Meu Perfil. E-mail duplicado é rejeitado. Atualização de senha invalida outras sessões; reinicialização do processo invalida todas as sessões, como anteriormente.
+5. Meu bloco de notas: criar, editar, listar e excluir notas privadas persistidas no banco compartilhado, filtradas por userId no BACKEND. Nem outro vendedor nem administrador têm leitura automática por essas rotas.
+6. Meus lembretes: lembretes particulares com data/hora, conclusão e notificações quando vencidos e o usuário estiver conectado (heartbeat). Uma notificação por ocorrência; mudança de prazo reabre o alerta. Sem push externo fora do app. Horário de referência: America/Sao_Paulo, substituível por C4U_TIMEZONE.
+7. Meus favoritos: armazenamento por usuário no servidor para conversas, mapas e outros registros; chat agora utiliza essa lista em vez de um único localStorage compartilhado. Favoritos legados do navegador não foram migrados automaticamente para não atribuir favoritos de uma pessoa a outra. Na seção Favoritos, demais registros são adicionados por ID interno e verificados quanto a acesso.
+8. Menções no chat: escrever @login ou @primeiroNome menciona um PARTICIPANTE daquela conversa; a notificação é individual e distinta. Não dá acesso a terceiros ao chat. Marca visual no texto com CSS isolado.
+9. Disponibilidade: Disponível/Ocupado/Em reunião/Ausente em Meu Perfil; visível no painel de presença e no cabeçalho das conversas diretas.
+10. Mapas colaborativos: proprietário compartilha um mapa pelo chat com permissão de leitura ou edição; edição por colaborador autorizado, notas/estado/prazo por bloco, comentários com identificação do autor, controle de revisão contra sobrescrita simultânea e exportação existente. Outros usuários não veem mapas privados. Compartilhamento autoriza membros atuais da conversa escolhida. Ainda não há coedição por cursor em tempo real nem painel de revogação individual de acesso.
+11. Caixa de entrada: CSS exclusivo da área, campo de pesquisa na pasta atual e filtro Não lidas. Mantém ações de arquivar/importante/confirmação de ciência, mensagens e banco anteriores.
+
+PRIVACIDADE E PROTEÇÃO DO PROJETO
+- Dados de notas, lembretes, favoritos, perfil, IRIS e status têm escopo individual. Não confundir com registros compartilhados da Prospecção ou com mapas compartilhados explicitamente pelo proprietário.
+- As rotas /api/personal/* sempre usam ID do usuário autenticado, nunca userId enviado pelo navegador.
+- Mapas compartilhados só são acessíveis ao criador e aos usuários explicitamente autorizados. Comentários obedecem ao mesmo controle.
+- O visual foi adicionado em public/c4u-personal-1606.css com classes isoladas; não troca styles.css, design-system.css ou as regras de negócio das telas antigas.
+- Não foram criadas novas credenciais, integrações externas ou chamadas à AWS. O arquivo data/db.json não foi alterado nesta entrega (na versão completa é a cópia de demonstração da v16.0.5).
+
+TESTE LOCAL NO WINDOWS
+1. Guarde backup dos arquivos e dados que utiliza atualmente. Extraia o ZIP COMPLETO v16.0.6 numa PASTA NOVA.
+2. Pare outra instância local que utilize a porta 3000. Execute TESTAR_LOCALHOST_3000.bat dentro da pasta C4U APP.
+3. Acesse http://localhost:3000 e entre com uma conta de TESTE que já administra.
+4. Confira a IRIS após autenticação, feche-a e teste Minha central e Meu perfil. Desative a IRIS, saia, entre e confira que não se abre; reative se desejar.
+5. Com contas de teste distintas, crie nota e lembrete, favoritou conversa e mapa; confirme que cada usuário vê somente seus dados. Teste status, menção e caixa de entrada.
+6. Crie mapa privado: terceiro usuário NÃO deve ter acesso. Compartilhe com uma conversa primeiro como leitura e depois com edição, verifique comentários e conflito de revisão ao editar em duas janelas.
+7. Teste os fluxos herdados: orçamento, precificação, pedidos, clientes, estoque, busca de produtos, chat com anexo, calendário e documentos.
+8. Na pasta C4U APP, execute npm run verify (precisa do Node.js). Isso executa smoke + testes v16.0.5 + v16.0.6.
+
+PACOTE INCREMENTAL — SOMENTE SOBRE v16.0.5 TESTE
+1. Pare o servidor de teste. Faça backup do código, data/db.json e do diretório de anexos (DATA_DIR/chat-uploads se existir).
+2. Extraia o ZIP ATUALIZAÇÃO em uma pasta temporária e copie os arquivos mantendo a estrutura dentro da RAIZ de C4U APP. Nunca copie um db.json por cima de outro.
+3. Execute node --check server.js, node --check public/app.js, node --check public/c4u-personal-1606.js e npm run verify. Só então inicie.
+4. As coleções personalNotes, personalReminders, personalFavorites e mindMapComments são inicializadas sem substituir registros preexistentes. Não execute importação/provisionamento de usuários para atualizar.
+5. Rollback de código: pare a aplicação e restaure o pacote anterior. Antes de reverter dados, avalie alterações feitas após o backup; a versão anterior não mostra os novos dados pessoais na UI, mas não há motivo para apagá-los.
+
+ONLINE / AWS
+NÃO usar este pacote incremental diretamente na AWS se a versão online não estiver comprovadamente na v16.0.5. O último deploy comprovado no histórico é v16.0, não v16.0.5. Faça inventário e exportação reais de AWS, backup externo restaurável, comparação das versões e homologação separada antes de qualquer publicação. Este ZIP completo inclui banco de demonstração e NUNCA deve sobrescrever o banco real. A nuvem não foi alterada.
+
+LIMITES HONESTOS DOS TESTES
+Sintaxe de JS, estrutura do ZIP, CSS e testes automatizados isolados de permissões/rotas passaram. Não foi possível executar o servidor Express completo ou homologar visualmente cada módulo nesta execução (dependência Express indisponível aqui). Há funcionalidades herdadas que exigem teste real com a equipe; não declarar produção certificada. A API Asia e CNPJ não foram validadas nesta atualização.

@@ -1,0 +1,29 @@
+C4U APP v15.1 — TEMPO REAL E CORREÇÃO VISUAL DO CHAT
+
+ALTERAÇÕES
+- Corrigida a cor das mensagens recebidas no Chat: fundo claro e texto escuro no tema claro.
+- Corrigido o seletor CSS que aplicava o fundo escuro das mensagens mesmo no tema claro.
+- Tema escuro agora usa mensagem recebida escura com texto claro, mantendo contraste.
+- Mensagens enviadas permanecem roxas com texto branco.
+- Chat passa a receber novas mensagens em tempo real mesmo com a caixa de digitação aberta.
+- Texto que estiver sendo digitado é preservado durante atualizações em tempo real.
+- Busca de conversas e posição da rolagem são preservadas durante atualização.
+- Imagem preparada para envio também é preservada.
+- Todas as áreas do sistema continuam recebendo atualização dos dados via SSE em tempo real.
+- Telas sem formulário aberto são redesenhadas automaticamente quando os dados mudam.
+- Formulários de cadastro/edição não são apagados por uma atualização externa; os dados internos são atualizados e a tela será renovada após sair da edição.
+- Corrigido o endpoint de leitura do Chat para não gravar no banco repetidamente quando não há nova mensagem, evitando ciclos de atualização.
+
+INSTALAÇÃO DA ATUALIZAÇÃO
+1. Feche o C4U.
+2. Faça uma cópia de segurança da pasta atual.
+3. Extraia o ZIP de ATUALIZAÇÃO sobre a pasta do C4U e confirme a substituição dos arquivos.
+4. NÃO substitua a pasta data. O pacote de atualização não inclui data.
+5. Inicie pelo arquivo INICIAR C4U SIST.bat.
+
+TESTE RECOMENDADO
+- Abra o C4U em dois computadores com usuários diferentes.
+- Entre na mesma conversa.
+- Envie uma mensagem de um computador e confirme que aparece no outro sem F5.
+- Confirme que a mensagem recebida fica legível sem selecionar o texto.
+- Faça uma alteração em Clientes, Orçamentos ou Pedidos e confirme que outra máquina atualiza a tela automaticamente quando ela não estiver editando um formulário.

@@ -1,0 +1,29 @@
+C4U APP v15.3 TESTE — PIPELINES E SIDEBAR PRO
+
+ALTERAÇÕES DESTA VERSÃO
+
+1. PIPELINES
+- Orçamentos que já possuem pedido marcado como Entregue deixam de aparecer na pipeline comercial.
+- Leads vinculados a clientes que já possuem pedido entregue deixam de aparecer na Pipeline de Prospecção.
+- O registro não é apagado: continua preservado em clientes, pedidos, histórico e relatórios.
+- A remoção visual acontece automaticamente após a atualização em tempo real do pedido.
+
+2. SIDEBAR
+- Barra lateral mais compacta.
+- Ícones substituídos por ícones vetoriais próprios, sem depender de internet.
+- Categorias VISÃO GERAL, COMUNICAÇÃO, COMERCIAL, PRODUTOS, OPERAÇÃO, DOCUMENTOS, GESTÃO e ADMINISTRAÇÃO podem ser abertas e fechadas.
+- O estado das categorias fica salvo no computador.
+- Transição suave ao abrir/fechar categorias.
+- Continua existindo o modo de recolher toda a sidebar pelo botão do cabeçalho.
+
+3. LOGIN / ENTRADA
+- Após autenticação, o C4U entra com uma transição curta e discreta da sidebar e conteúdo principal.
+
+4. SEGURANÇA DE DADOS
+- A atualização não precisa substituir data/db.json nem backups.
+- Nenhum pedido, lead, orçamento ou histórico é apagado por estas mudanças.
+
+TESTE RECOMENDADO
+- Marque um pedido ligado a um orçamento como Entregue e confirme que ele não aparece mais na pipeline comercial.
+- Para um lead convertido em cliente, marque um pedido desse cliente como Entregue e confirme que ele sai da Pipeline de Prospecção.
+- Abra/feche as categorias da sidebar e recarregue a página para confirmar que o estado fica salvo.

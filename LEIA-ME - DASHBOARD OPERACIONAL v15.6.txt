@@ -1,0 +1,27 @@
+C4U APP — v15.6 TESTE — DASHBOARD OPERACIONAL
+
+Esta versão evolui o Dashboard e a barra superior usando a v15.5 como base.
+
+PRINCIPAIS MUDANÇAS
+- Barra superior com busca, tema, notificações, usuários online e perfil do usuário.
+- Dashboard com Orçamentos no mês, Pedidos em andamento, Faturamento previsto e Entregas próximas.
+- Agenda do dia integrada ao Calendário e Roteiro.
+- Pedidos recentes com cliente, responsável, entrega, valor e status.
+- Atividade recente baseada no histórico/auditoria. Administradores veem a equipe; demais usuários veem a própria atividade.
+- Mensagens não lidas do Chat e Caixa de Entrada no Dashboard.
+- Roteiro de hoje e previsão dos próximos dias no rodapé do Dashboard.
+- Atualizações de presença e notificações em tempo real.
+
+SEGURANÇA / REGRAS
+- Não foram removidos módulos existentes.
+- Chat privado continua respeitando os participantes das conversas.
+- Vendedores continuam com estatísticas comerciais filtradas para sua própria carteira quando aplicável.
+- Dados e backups devem ser preservados ao aplicar o ZIP de atualização.
+
+TESTE RECOMENDADO
+1. Entrar com Administrador e confirmar usuários online no topo.
+2. Gerar uma notificação e confirmar o sino.
+3. Criar compromisso no Calendário/Roteiro e conferir Agenda do dia.
+4. Criar/editar pedido e conferir Pedidos recentes.
+5. Enviar mensagem em outro computador e conferir Mensagens não lidas.
+6. Confirmar atualização sem F5.

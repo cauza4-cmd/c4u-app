@@ -1,0 +1,33 @@
+C4U APP - VERSÃO EXE TESTE 14.3.0-test.1
+
+OBJETIVO
+Esta versão transforma o C4U em um aplicativo de janela própria usando Electron.
+Não é necessário abrir o Chrome nem digitar localhost depois de instalado.
+
+COMO GERAR O INSTALADOR NO WINDOWS
+1. Mantenha sua versão atual do C4U guardada. Este pacote é de teste.
+2. Extraia esta pasta.
+3. Dê dois cliques em "GERAR INSTALADOR TESTE.bat".
+4. Na primeira execução, o Windows baixará as dependências do Electron pela internet.
+5. Ao terminar, a pasta DIST será aberta automaticamente.
+6. Execute o arquivo C4U-APP-Setup-14.3.0-test.1.exe.
+7. Instale e abra pelo atalho C4U APP.
+
+IMPORTANTE SOBRE OS DADOS
+- O aplicativo instalado grava os dados em uma pasta própria do Windows (AppData), e não dentro dos arquivos protegidos do instalador.
+- Na primeira abertura, ele cria uma cópia inicial do banco incluído neste pacote.
+- Esta versão teste NÃO deve substituir a sua instalação principal sem testarmos primeiro login, cadastros, PDFs, backups e rede.
+
+O QUE MUDA NESTA VERSÃO
+- C4U abre em janela própria.
+- Não mostra barra/endereço do navegador.
+- Abre maximizado.
+- Usa o logo 4Z/C4U como ícone.
+- Evita abrir duas instâncias ao mesmo tempo.
+- Servidor local inicia junto com o aplicativo.
+- Banco e backups são gravados em local editável no Windows.
+
+PRÓXIMA ETAPA APÓS O TESTE
+Depois que esta versão estiver abrindo corretamente no Windows, podemos decidir entre:
+A) C4U.exe servidor, com o banco no computador principal; ou
+B) C4U.exe cliente, conectando a um servidor central/remoto.

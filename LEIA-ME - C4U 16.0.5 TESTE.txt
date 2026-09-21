@@ -1,0 +1,54 @@
+C4U APP v16.0.5 TESTE — CORREÇÕES, CHAT E MAPAS MENTAIS
+Base preservada: v16.0.4 Visual Claro. Este é um pacote de teste interno, não uma versão homologada para produção.
+
+1. ESCOPO ENTREGUE
+- Biblioteca e seletor do orçamento: busca confirmada pelo Enter/lupa, por nome e códigos internos, do fornecedor e pai. Nome/código têm prioridade; descrição/categoria não geram resultados irrelevantes na pesquisa padrão.
+- Biblioteca: administrador acessa "Conferir fotos/códigos" e vê alerta de código ausente/duplicado, imagens idênticas no mesmo item e imagem compartilhada entre itens com cores diferentes (inclusive sufixos conhecidos no código). Pode abrir o item para corrigir manualmente.
+- Ação de limpeza opcional e explícita: remove apenas cópias exatamente iguais dentro do MESMO item, criando backup JSON antes de modificar. Nunca troca imagens entre produtos nem supõe automaticamente qual cor uma foto representa.
+- Chat redesenhado com navegação lateral, conversas, grupos, equipe, favoritos locais, caixa de entrada, atalhos para calendário e mapas mentais. O chat antigo e suas conversas continuam no mesmo banco. CSS restrito às novas telas.
+- Chat: arquivos JPG/JPEG, PNG, WebP, PDF, TXT, CSV, DOCX e XLSX, até 6 MB cada. Os arquivos ficam fora do db.json, em DATA_DIR/chat-uploads. Downloads e miniaturas passam por autorização de participante. O histórico preserva anexos/mensagens antigos.
+- Chat → calendário: cria compromisso vinculado à conversa, com aviso na conversa. Formulário do evento existente oferece atalho para voltar ao chat vinculado.
+- Mapas mentais: criar, abrir, renomear, adicionar blocos, subtópicos, arrastar, ajustar texto/cor, salvar, excluir, compartilhar no chat e exportar SVG ou imprimir/salvar em PDF pelo navegador. Somente o autor edita; os participantes da conversa escolhida recebem acesso de leitura.
+- Dados, lógica da precificação, clientes, usuários, PDF de orçamentos e demais módulos da v16.0.4 preservados. O pacote NÃO inclui a integração de API nova nem alteração de credenciais.
+
+2. O QUE NÃO FOI CORRIGIDO AUTOMATICAMENTE
+- Não há prova suficiente de qual foto/cor deve estar associada a cada código. O diagnóstico indica suspeitas, não conserta vínculo de cor entre itens. Para corrigir isso, confirme o item com a fonte original do fornecedor, abra a ficha e salve a imagem/cor correta.
+- Não foi criada edição simultânea multiusuário do mesmo mapa. Um mapa compartilhado é somente leitura para destinatários. Os favoritos da lista de chats são pessoais e guardados no navegador.
+- Não foram criados canais independentes; a navegação organiza conversas diretas e grupos já existentes.
+- O PDF dos mapas é gerado pelo fluxo "Imprimir / PDF" do navegador; o exportador direto é SVG.
+- Não há antivírus embutido nos anexos. Permita somente arquivos confiáveis; há verificação de formato/assinatura básica, tamanho e autorização por conversa.
+
+3. COMO TESTAR NO WINDOWS SEM ALTERAR O SISTEMA ATUAL
+1) Faça uma cópia de segurança da sua pasta atual e do seu banco de dados reais.
+2) Extraia C4U_APP_v16.0.5_TESTE_COMPLETO_LOCALHOST.zip numa PASTA NOVA. Não sobreponha sua instalação atual.
+3) Feche outro servidor C4U que esteja usando a porta 3000.
+4) Instale Node.js e, com internet, execute TESTAR_LOCALHOST_3000.bat; ele instala dependências npm quando necessário.
+5) Abra http://localhost:3000. Entre com uma conta de TESTE que você já administra; não compartilhe credenciais por chat.
+6) Teste busca por "caneta" e por código exato; confira Biblioteca, orçamento e fotos. Na Biblioteca clique em Conferir fotos/códigos e revise os alertas.
+7) Teste com dois usuários: chat direto/grupo, PDF/imagem, anexos, download, autorização de um terceiro usuário, calendário vinculado e envio de mapa mental.
+8) Teste os módulos antigos: orçamento, precificação, pedido, clientes, estoque, relatório, calendário e caixa de entrada.
+9) Execute npm run verify na pasta C4U APP. Os testes automatizados não substituem homologação de navegador/rede.
+
+4. COMO APLICAR O PACOTE DE ATUALIZAÇÃO AO SEU AMBIENTE DE TESTE v16.0.4
+- Faça cópia da pasta de código e de data/db.json.
+- Pare o processo C4U antes de substituir arquivos.
+- Extraia o ZIP DE ATUALIZAÇÃO numa pasta temporária e copie para a RAIZ de C4U APP mantendo os caminhos e subpastas. Não remova arquivos antigos.
+- O ZIP de atualização contém SOMENTE os arquivos alterados, teste e este guia; NÃO inclui data/db.json, clientes, planilhas, uploads, backups, chaves ou tokens.
+- Confira node --check server.js, node --check public/app.js, npm run verify e reinicie a aplicação.
+- As novas coleções mindMaps/chatAttachments são inicializadas automaticamente quando o servidor lê o banco existente. Nenhum script de importação de planilhas ou provisionamento de usuários deve ser executado para esta atualização.
+- Anexos futuros exigem backup de DATA_DIR/chat-uploads ALÉM do db.json. Se faltar essa pasta após restauração, as mensagens continuam, mas o download dos anexos não funcionará.
+
+5. SOBRE O SERVIDOR ONLINE / AWS
+NÃO aplique o ZIP completo na nuvem. A versão comprovadamente hospedada na documentação anterior era v16.0, enquanto este patch pressupõe a estrutura de código da v16.0.4; confira a versão REAL da AWS e compare alterações antes de tentar atualizar. Não rode um patch v16.0.4→v16.0.5 diretamente sobre v16.0.
+Antes de qualquer publicação: exporte código real, db.json vivo, uploads, configurações de PM2/Nginx e crie backup externo restaurável; teste numa instância separada; tenha plano de rollback. O servidor online NÃO foi acessado/alterado por este pacote.
+
+6. TESTES E LIMITAÇÕES DA ENTREGA
+- Sintaxe de server.js e public/app.js validada.
+- Testes de regressão existentes e novos testes de rotas executados com sucesso em ambiente isolado (Express simulado para registro de rotas e handlers reais).
+- CSS novo analisado: seletores restritos aos módulos e sintaxe sem erros.
+- Não foi possível executar o servidor Express completo nem o teste gráfico no navegador deste ambiente: a instalação de dependências npm falhou por falta de acesso à rede, e o navegador bloqueou navegação local. Faça a homologação funcional de ponta a ponta no localhost antes de publicar.
+
+7. ARQUIVOS ALTERADOS COM RELAÇÃO À v16.0.4
+server.js, public/app.js, public/index.html, package.json.
+Arquivos novos: lib/product-quality.js, public/c4u-chat-maps-1605.css, tests/v1605.js, este LEIA-ME.
+Banco data/db.json do pacote completo: cópia IGUAL à v16.0.4 entregue; sem alterações automáticas nos dados. O ZIP completo é PRIVADO: inclui banco de teste com cadastros e hashes de contas; não publique-o em repositórios públicos.

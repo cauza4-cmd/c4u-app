@@ -1,0 +1,45 @@
+C4U APP — ÁSIA IMPORT — INTEGRAÇÃO EXPERIMENTAL
+
+Base exata: 16.0.7-spot.3.3-somarcas.2-test.1
+Nova versão: 16.0.7-spot.3.3-somarcas.2-asia.1-test.1
+Este pacote ainda NÃO está instalado no servidor. Nenhuma compra é enviada ao fornecedor.
+
+ANTES: gere nova chave/segredo se eles foram compartilhados e mantenha-os somente nos arquivos privados em /home/admin/.config/c4u (chmod 600). Nunca anexe credenciais nem backup com dados de clientes em chats.
+
+1. Windows PowerShell:
+scp -o IdentitiesOnly=yes -i "$HOME\Downloads\LightsailDefaultKey-us-east-1.pem" "$HOME\Downloads\C4U_ASIA_INTEGRACAO_AWS_TESTE.zip" admin@c4usystem.ddns.net:/home/admin/c4u-asia-update.zip
+
+2. AWS, em UMA SESSÃO:
+unzip -tq /home/admin/c4u-asia-update.zip
+STAGE="/home/admin/c4u-asia-stage-$(date +%Y%m%d-%H%M%S)"; mkdir -p "$STAGE" && unzip -oq /home/admin/c4u-asia-update.zip -d "$STAGE"
+bash "$STAGE/PRECHECK_ASIA.sh" "/home/admin/c4u/C4U APP"
+CONTINUE SOMENTE SE APARECER PRECHECK_ASIA_OK. Se BLOQUEADO, não instale; envie apenas o erro, não os arquivos secretos.
+
+3. Teste pré-instalação (AWS):
+cd "$STAGE" && node --check server.js && node --check public/app.js && node --check lib/asia-connector.js && node --check lib/asia-catalog.js && npm run asia:verify
+CONTINUE SOMENTE SE APARECER ASIA_INTEGRACAO_TESTES_OK.
+
+4. Avise a equipe da breve indisponibilidade. AWS:
+pm2 stop c4u
+umask 077; BACKUP="/home/admin/c4u-antes-asia-$(date +%Y%m%d-%H%M%S).tar.gz"; tar -czf "$BACKUP" -C /home/admin/c4u "C4U APP" && tar -tzf "$BACKUP" >/dev/null && echo "$BACKUP"
+SE BACKUP FALHAR: pm2 restart c4u; NÃO CONTINUE. Arquivo de backup possui informações privadas.
+
+5. AWS, somente com backup verificado:
+unzip -oq /home/admin/c4u-asia-update.zip -d "/home/admin/c4u/C4U APP"
+cd "/home/admin/c4u/C4U APP" && node -p "require('./package.json').version"
+Esperado: 16.0.7-spot.3.3-somarcas.2-asia.1-test.1
+node --check server.js && node --check public/app.js && npm run asia:verify && npm run somarcas:verify && node tests/somarcas-imagens-categorias-hotfix.js && npm run spot:verify && npm run catalog:verify && npm run dialogs:verify
+SE TESTE FALHAR: mantenha serviço parado e solicite orientação de rollback antes de escrever dados novos.
+
+6. AWS, apenas se passou:
+pm2 restart c4u --update-env
+pm2 status
+
+7. Navegador: Ctrl+F5; Integrações > Ásia Import > Testar conexão > Gerar prévia completa.
+A API real retornou 474 produtos-pai nos testes anteriores do usuário. O número de SKUs poderá ser maior porque há variações. Confira imagens, categorias, preço, estoque SP e duplicações. NÃO importe até conferir e autorizar.
+Depois, digite IMPORTAR ASIA na prévia e confirme. O servidor cria backup de db.json antes do commit.
+Teste busca por SKU e código-pai, aba Ásia, adição ao orçamento, salvamento e reabertura; confira SPOT, Só Marcas e dados antigos.
+
+SEGURANÇA: este pacote só consulta listarProdutos2 via POST multipart/form-data, credenciais ficam nos arquivos privados ou ambiente. Sem pedido de compra e sem auto-sincronização. Coleção asiaCatalog própria. Itens da planilha antiga NÃO são excluídos ou migrados automaticamente.
+
+LIMITE: os testes do pacote usam respostas simuladas, NÃO substituem a prévia real da AWS. Se o pré-check for bloqueado, não force a instalação nem sobrescreva outros arquivos.

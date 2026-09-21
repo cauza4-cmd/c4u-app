@@ -1,0 +1,75 @@
+/* Catálogo unificado e mapas mentais avançados: alterações isoladas nesta versão local. */
+#appShell .c4u-unified-toolbar{align-items:center;flex-wrap:wrap;gap:12px}
+#appShell .c4u-unified-toolbar .confirmed-search{flex:1;min-width:min(100%,330px);display:flex;gap:6px}
+#appShell .c4u-unified-toolbar .confirmed-search .search{min-width:120px;flex:1}
+#appShell .c4u-unified-info{padding:12px 16px;border-radius:12px;background:#f3f0fe;border:1px solid #dfd5f3;color:#4e346f;font-size:12px;margin-bottom:16px}
+#appShell .c4u-unified-source{display:inline-block;max-width:100%;padding:4px 9px;border-radius:999px;background:#ece5fb;color:#593696;font-size:10px;font-weight:750;white-space:nowrap}
+#appShell .c4u-unified-summary{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:13px 4px;font-size:13px;color:var(--text,#332557)}
+#appShell .c4u-unified-summary span{color:var(--muted,#716881)}
+#appShell .c4u-unified-pages{display:flex;justify-content:center;align-items:center;gap:16px;padding:20px}
+#appShell .c4u-unified-grid .library-card{min-width:0}
+#appShell .c4u-unified-card .library-card-body{display:grid;gap:8px}
+#appShell .c4u-unified-card .library-card-body h3{line-height:1.35;margin:0}
+#appShell .c4u-unified-detail{width:min(920px,calc(100vw - 36px));max-width:920px;padding:22px;max-height:calc(100vh - 36px);height:min(680px,calc(100vh - 36px));overflow:hidden;display:flex;flex-direction:column;gap:12px}#appShell .c4u-detail-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex:0 0 auto}#appShell .c4u-detail-head h2{margin:4px 0 5px;font-size:22px;line-height:1.15}#appShell .c4u-detail-head p{margin:0;color:var(--muted,#716881);font-size:11px}.c4u-detail-source .c4u-unified-source{display:inline-flex}.c4u-detail-close{min-width:38px}.c4u-detail-main{display:grid;grid-template-columns:minmax(260px,42%) minmax(0,1fr);gap:18px;min-height:0;flex:1}.c4u-detail-media{border:1px solid var(--border,#e3d9ee);border-radius:15px;background:#fff;display:grid;place-items:center;min-height:240px;overflow:hidden}.c4u-unified-detail-image{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;margin:0}.c4u-detail-no-image{color:var(--muted,#716881);font-size:12px}.c4u-detail-data{min-width:0;overflow:hidden}.c4u-detail-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.c4u-detail-metrics>div{padding:10px;border:1px solid var(--border,#e3d9ee);border-radius:11px;background:var(--surface-2,#faf8fe);min-width:0}.c4u-detail-metrics small{display:block;color:var(--muted,#716881);font-size:9px;margin-bottom:4px}.c4u-detail-metrics b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}.c4u-detail-description{font-size:12px;line-height:1.5;margin:12px 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.c4u-detail-data>h3{font-size:12px;margin:8px 0}.c4u-detail-data>p,.c4u-detail-data>small{font-size:10px;line-height:1.45}.c4u-detail-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--border,#e3d9ee);padding-top:10px;flex:0 0 auto}.c4u-detail-footer small{color:var(--muted,#716881);font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.c4u-pricing-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#appShell .c4u-unified-detail-image{display:block;max-width:100%;max-height:230px;object-fit:contain;margin:12px auto}
+#appShell .c4u-unified-picker .c4u-picker-search{display:flex;gap:8px}
+#appShell .c4u-unified-picker .c4u-picker-search input{flex:1;min-width:0}
+#appShell .c4u-unified-picker-hint{display:block;color:var(--muted,#716881);font-size:11px;margin:10px 0 15px}
+#appShell .c4u-unified-picker-results{max-height:56vh;overflow:auto;display:grid;gap:6px}
+#appShell .c4u-unified-picker-count{color:var(--muted,#716881);font-size:12px;margin:4px 0 8px}
+#appShell .c4u-unified-picker .picker-item{width:100%;min-height:74px;display:flex;align-items:center;text-align:left;gap:13px}
+#appShell .c4u-unified-picker .picker-item span:nth-child(2){display:grid;gap:4px;flex:1;min-width:0}
+#appShell .c4u-unified-picker .picker-item .c4u-unified-source{vertical-align:middle}
+#appShell .c4u-unified-picker .picker-item small{line-height:1.4}
+/* Mind editor: larger canvas, per-node dimensions and secondary relationships. */
+#appShell .c4u-mind-pro .mind-editor-layout{grid-template-columns:minmax(0,1fr) 295px}
+#appShell .c4u-mind-pro .mind-canvas{width:3200px;height:2000px}
+#appShell .c4u-mind-pro .mind-wires{width:3200px;height:2000px}
+#appShell .c4u-mind-pro .mind-canvas-scroll{max-height:72vh}
+#appShell .c4u-mind-pro .mind-node{width:var(--mind-width,178px);height:var(--mind-height,90px);box-sizing:border-box;padding:13px 16px;overflow:hidden;gap:7px;justify-content:flex-start}
+#appShell .c4u-mind-pro .mind-node.c4u-mind-shape-rectangle{border-radius:4px!important}
+#appShell .c4u-mind-pro .mind-node.c4u-mind-shape-pill{border-radius:999px!important;padding-left:25px;padding-right:25px}
+#appShell .c4u-mind-pro .mind-node.c4u-mind-shape-note{border-radius:3px!important;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%);padding-right:22px;border-color:#e1c780!important}
+#appShell .c4u-mind-pro .mind-node b{font-size:12px;line-height:1.35;-webkit-line-clamp:3;overflow-wrap:anywhere}
+#appShell .c4u-mind-pro .c4u-mind-node-notes{font-size:11px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line;word-break:break-word;opacity:.85;width:100%;border-top:1px solid #65469b35;padding-top:5px}
+#appShell .c4u-mind-pro .mind-inspector{max-height:75vh;overflow:auto;position:sticky;top:8px}
+#appShell .c4u-mind-pro .mind-inspector select,#appShell .c4u-mind-pro .mind-inspector input[type=number]{width:100%;border:1px solid #d9ceed;border-radius:9px;padding:9px;min-height:38px;background:#fff;color:#332557}
+#appShell .c4u-mind-dimension{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#appShell .c4u-mind-help{font-size:12px;line-height:1.6;padding:12px 16px;background:#f3effe;border:1px solid #e4d9fb;border-radius:12px;color:#4e356e;margin:10px 0 15px}
+#appShell .c4u-mind-links{display:grid;gap:8px;max-height:180px;overflow:auto}
+#appShell .c4u-mind-link{border:1px solid #c8def5;border-radius:9px;padding:8px 10px;background:#f1f7ff;font-size:11px;color:#285b96;display:flex;align-items:center;justify-content:space-between;gap:9px}
+#appShell .c4u-mind-link button{cursor:pointer;border:0;background:transparent;color:#aa234b;font-size:18px}
+@media(max-width:1050px){#appShell .c4u-mind-pro .mind-editor-layout{grid-template-columns:minmax(0,1fr)}#appShell .c4u-mind-pro .mind-inspector{max-height:none;position:static}}
+@media(max-width:650px){#appShell .c4u-unified-toolbar .confirmed-search{width:100%}#appShell .c4u-unified-picker .c4u-picker-search{flex-wrap:wrap}#appShell .c4u-unified-picker .c4u-picker-search button{width:100%}}
+
+/* Supplier navigation and controlled spreadsheet cleanup. */
+#appShell .c4u-supplier-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:10px 0 14px;margin-bottom:8px;border-bottom:1px solid #e5ddec}
+#appShell .c4u-supplier-tab{background:#fff;border:1px solid #dfd4ee;color:#50316d;padding:10px 15px;border-radius:11px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
+#appShell .c4u-supplier-tab.active{background:#68369e;color:#fff;border-color:#68369e;box-shadow:0 4px 12px #6840ae2a}
+#appShell .c4u-supplier-tab small{border-radius:7px;background:#eee6f8;color:#50316d;padding:2px 5px;font-size:10px}
+#appShell .c4u-catalog-filters{display:flex;gap:15px;flex-wrap:wrap;margin:0 0 13px}
+#appShell .c4u-catalog-filters label{display:grid;gap:5px;font-size:12px;font-weight:700;color:var(--text,#432c5b);flex:1;min-width:160px;max-width:360px}
+#appShell .c4u-catalog-filters select{width:100%;height:40px;border:1px solid #d5c5e9;border-radius:10px;background:#fff;color:#362447;padding:8px}
+#appShell .c4u-sheet-cleanup{max-width:760px;max-height:87vh;overflow:auto;padding:24px}
+#appShell .c4u-sheet-cleanup label{display:grid;gap:8px;font-size:13px;font-weight:700}
+#appShell .c4u-sheet-cleanup input{padding:11px;border:1px solid #d0bdde;border-radius:8px}
+#appShell .c4u-cleanup-samples{max-height:250px;overflow:auto;background:#faf8fd;border:1px solid #e4ddeb;border-radius:10px;padding:10px;display:grid;gap:7px}
+#appShell .c4u-cleanup-samples div{font-size:12px;border-bottom:1px solid #eee;padding-bottom:6px}
+#appShell .c4u-cleanup-samples small{display:block;color:#805e95}
+#appShell .c4u-sheet-cleanup .btn-danger{background:#9b2644;color:white}
+
+#appShell .c4u-unified-detail .c4u-somarcas-choice,#appShell .c4u-unified-detail .c4u-price-table{max-height:190px;overflow:hidden}
+@media(max-width:760px){#appShell .c4u-unified-detail{width:calc(100vw - 20px);height:calc(100vh - 20px);max-height:calc(100vh - 20px);padding:14px}.c4u-detail-main{grid-template-columns:1fr;grid-template-rows:190px minmax(0,1fr)}.c4u-detail-media{min-height:0}.c4u-detail-metrics{grid-template-columns:repeat(3,1fr)}.c4u-detail-footer small{display:none}.c4u-detail-footer .btn{width:100%}}
+
+/* v16.0.8 — biblioteca: a foto fica confinada ao bloco superior; texto nunca sobrepõe a imagem. */
+#appShell .c4u-unified-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+#appShell .c4u-unified-grid .c4u-unified-card{display:flex!important;flex-direction:column!important;min-width:0;position:relative;overflow:hidden!important;contain:layout paint;isolation:isolate}
+#appShell .c4u-unified-grid .c4u-unified-card .library-card-image{height:220px!important;min-height:220px!important;max-height:220px!important;flex:0 0 220px!important;overflow:hidden!important;position:relative;display:grid;place-items:center;background:#f7f5f8;z-index:0}
+#appShell .c4u-unified-grid .c4u-unified-card .library-card-image img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;margin:0!important;position:static!important;transform:none!important}
+#appShell .c4u-unified-grid .c4u-unified-card .library-card-body{position:relative;z-index:1;display:grid;gap:8px;padding:14px;background:#fff;min-width:0;overflow:hidden}
+#appShell .c4u-unified-grid .c4u-unified-card .library-card-body h3{margin:0!important;line-height:1.35!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+#appShell .c4u-unified-grid .c4u-unified-card .library-card-body>p{margin:0;min-height:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#appShell .c4u-unified-grid .c4u-unified-card .library-price{margin:4px 0 0}
+@media(max-width:1250px){#appShell .c4u-unified-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){#appShell .c4u-unified-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#appShell .c4u-unified-grid{grid-template-columns:1fr}}

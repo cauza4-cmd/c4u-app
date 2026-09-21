@@ -1,0 +1,60 @@
+{
+  "name": "c4u-app",
+  "version": "16.0.8-performance.1-test.1",
+  "private": true,
+  "description": "C4U APP v16.0.8: cache de banco, bootstrap de sessão, navegação rápida e biblioteca de itens sem sobreposição de imagens.",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:server": "node server.js",
+    "build:win": "electron-builder --win nsis",
+    "start:cloud": "node server.js",
+    "start:local": "node server.js",
+    "verify": "node tests/smoke.js && node tests/v1605.js && node tests/v1606.js && node tests/v1607.js && node tests/spot-connector.js && node tests/spot-phase2.js && node tests/spot-phase3.js && node tests/price-composition.js",
+    "spot:verify": "node tests/spot-connector.js && node tests/spot-phase2.js && node tests/spot-phase3.js",
+    "catalog:verify": "node tests/catalog-integrado.js",
+    "dialogs:verify": "node tests/c4u-dialogs.js",
+    "somarcas:verify": "node tests/somarcas-phase1.js && node tests/somarcas-phase2.js",
+    "asia:verify": "node tests/asia-integration.js",
+    "xbz:verify": "node tests/xbz-integration.js",
+    "price:verify": "node tests/price-composition.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "br.com.tocadosbrindes.c4uapp",
+    "productName": "C4U APP",
+    "artifactName": "C4U-APP-Setup-${version}.${ext}",
+    "asar": true,
+    "files": [
+      "electron-main.js",
+      "server.js",
+      "public/**/*",
+      "data/db.json",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "public/4z-system.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "C4U APP",
+      "uninstallDisplayName": "C4U APP"
+    }
+  }
+}

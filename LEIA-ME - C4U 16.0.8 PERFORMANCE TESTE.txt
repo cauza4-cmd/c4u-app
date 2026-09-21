@@ -1,0 +1,14 @@
+C4U APP v16.0.8-performance.1-test.1
+
+CORREÇÕES DESTA VERSÃO
+- Biblioteca: imagem do produto fica confinada ao bloco da foto; nome/código/estoque/preço não ficam sobre a imagem.
+- Navegação: cache do banco em memória no servidor para evitar reparse do db.json a cada requisição.
+- Sessão: bootstrap único para aquecer o cache do navegador em uma única chamada, substituindo dezenas de chamadas paralelas de coleções.
+- Dashboard: primeira renderização não espera o carregamento completo do cache; o aquecimento ocorre em segundo plano.
+- Troca de abas: atualização em segundo plano só quando o cache está vencido, sem bloquear a troca de tela.
+- Catálogo unificado: cache curto de consultas para reduzir recomputação durante pesquisa/categorias.
+- Banco preservado: clientes, orçamentos, pedidos, auditoria, chat e catálogos atuais foram mantidos; apenas a Biblioteca de Itens foi restaurada para os 1.386 itens funcionais já existentes nos backups do próprio pacote.
+
+IMPORTANTE
+- Credenciais privadas dos fornecedores ficam fora do projeto, como no ambiente atual. Não coloque tokens/senhas no ZIP.
+- O ZIP de release não inclui node_modules nem a pasta backups; o servidor pode reutilizar o node_modules existente.

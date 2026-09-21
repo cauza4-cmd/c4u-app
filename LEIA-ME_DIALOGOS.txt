@@ -1,0 +1,5 @@
+C4U APP PATCH v16.0.7-spot.3.3-test.1
+PACOTE CONSOLIDADO: biblioteca por fornecedor, busca única, mapas avançados, prévia e limpeza seletiva da planilha, diálogos internos.
+REQUISITO: versão na AWS EXATAMENTE 16.0.7-spot.3-test.1 e hashes correspondentes ao PRECHECK_C4U.sh. Se a versão 3.2 já foi instalada, NÃO sobreponha este arquivo. Envie versão/hash do servidor para gerar atualização incremental.
+A instalação NÃO limpa a planilha. Na Biblioteca, administrador abre prévia e valida contagens; ação final exige LIMPAR PLANILHA. A rotina trata SOMENTE source='Asia Import - planilha'. Outros registros de importação com origem distinta NÃO são incluídos.
+Após deploy valide cancelamento de exclusão de bloco e ligação com texto, exclusão de item, limpeza da planilha e aprovação pública. Verifique se não há popup de localhost ou do domínio. Não envia compras à SPOT.

@@ -1,0 +1,39 @@
+/* SPOT integration panel - scoped styles, does not affect existing C4U screens. */
+.c4u-spot-panel{margin-top:18px;padding:24px!important}
+.c4u-spot-panel .c4u-spot-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.c4u-spot-panel .c4u-spot-head h2{font-size:22px;margin:4px 0 6px}
+.c4u-spot-panel .c4u-spot-head p{margin:0;max-width:67ch;color:var(--muted)}
+.c4u-spot-panel .c4u-spot-kicker{font-size:10px;letter-spacing:.15em;font-weight:750;color:var(--p)}
+.c4u-spot-panel .c4u-spot-status{margin:18px 0;padding:13px 16px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2);font-size:12px}
+.c4u-spot-panel .c4u-spot-status span{color:var(--muted)}
+.c4u-spot-panel .c4u-spot-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.c4u-spot-panel .c4u-spot-actions label{font-size:12px;font-weight:650}
+.c4u-spot-panel .c4u-spot-actions select{background:var(--surface);color:var(--text);border:1px solid var(--border);padding:10px;border-radius:10px;max-width:100%}
+.c4u-spot-panel .c4u-spot-feedback{padding:12px 0;font-size:12px;min-height:42px;color:var(--text)}
+.c4u-spot-panel .c4u-spot-result{overflow:auto;max-width:100%}
+.c4u-spot-panel .c4u-spot-result td,.c4u-spot-panel .c4u-spot-result th{overflow-wrap:anywhere;min-width:94px}
+.c4u-spot-panel .c4u-spot-result p{font-size:12px;overflow-wrap:anywhere;color:var(--muted)}
+.c4u-spot-panel .c4u-spot-footnote{font-size:11px;margin:18px 0 0;color:var(--muted)}
+@media(max-width:620px){.c4u-spot-panel{padding:16px!important}.c4u-spot-panel .c4u-spot-actions{align-items:stretch;flex-direction:column}.c4u-spot-panel .c4u-spot-actions>*{width:100%}}
+/* Fase 2: isolation prevents collisions with global page styles. */
+.c4u-spot-panel .c4u-spot-phase2{margin-top:24px;padding:18px;border:1px solid #ded0f4;border-radius:16px;background:linear-gradient(140deg,#fbfaff,#f7f3ff)}
+.c4u-spot-panel .c4u-spot-phase2 h3{margin:0 0 7px;font-size:17px;color:#372551}
+.c4u-spot-panel .c4u-spot-phase2 p{font-size:12px;color:#5b5271;max-width:90ch;margin:0 0 13px}
+.c4u-spot-panel .c4u-spot-summary{display:grid;gap:5px;padding:12px 0;font-size:12px;color:#433358}
+.c4u-spot-panel .c4u-spot-summary b{font-size:14px}
+.c4u-spot-panel .c4u-spot-confirm{border:1px solid #cfb7f0;background:#fff;padding:14px;border-radius:12px;margin-top:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.c4u-spot-panel .c4u-spot-confirm label{width:100%;font-size:12px;font-weight:650}
+.c4u-spot-panel .c4u-spot-confirm input{min-height:38px;padding:9px;border:1px solid #c9bbe5;border-radius:8px}
+.c4u-spot-picker{border-top:1px solid #dfd4ef;margin-top:18px;padding:16px 0 0}
+.c4u-spot-picker .c4u-spot-picker-head{display:flex;flex-direction:column;gap:3px;margin-bottom:11px}
+.c4u-spot-picker .c4u-spot-picker-head small{color:var(--muted,#756987)}
+.c4u-spot-picker .c4u-spot-actions input{flex:1;min-width:190px;border:1px solid var(--border,#dbd2e8);border-radius:10px;padding:11px}
+.c4u-spot-picker #spotQuoteResults{margin-top:10px;display:grid;gap:7px;max-height:360px;overflow:auto}
+.c4u-spot-cost-modal{max-width:560px;padding:26px}
+.c4u-spot-cost-modal p{font-size:13px;line-height:1.65}
+.c4u-spot-cost-check{display:flex;gap:9px;align-items:flex-start;margin:14px 0;font-size:12px;line-height:1.5}
+.c4u-spot-cost-check input{margin-top:3px;flex-shrink:0}
+@media(max-width:650px){.c4u-spot-panel .c4u-spot-confirm input,.c4u-spot-panel .c4u-spot-confirm button{width:100%}}
+
+/* Fase 3: status de sincronização — isolado da identidade visual existente. */
+.c4u-spot-sync-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}.c4u-spot-sync-grid>div{display:flex;flex-direction:column;gap:6px;border:1px solid var(--border,#e3ddec);border-radius:12px;padding:12px;background:var(--surface,#fff)}.c4u-spot-sync-grid b{overflow-wrap:anywhere}.c4u-spot-sync-grid small{color:var(--text-muted,#696371)}

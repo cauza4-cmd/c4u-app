@@ -1,0 +1,28 @@
+C4U APP v15.2 TESTE — PROSPECÇÃO + ROTEIRO
+
+NOVIDADES
+1. Prospecção unifica a visão de Leads e o Pipeline.
+2. Leads é uma lista compartilhada por toda a equipe e atualizada via SSE.
+3. Follow-up mostra somente clientes que já possuem pedido (clientes compradores).
+4. Pipeline usa os mesmos registros da lista de Leads.
+5. Listas compartilhadas: canais de contato, origem do lead e segmentos.
+6. Conversão de Lead em Cliente sem redigitação.
+7. Roteiro novo no menu principal: hoje, próximos dias e histórico.
+8. Cada roteiro aceita Retiradas e Entregas, endereço, A/C, vendedor, pedido, horário e observações.
+9. Roteiro conversa diretamente com o Calendário: itens aparecem automaticamente nas respectivas datas.
+10. Inclusões de roteiro podem gerar notificação para o vendedor responsável.
+11. Impressão A4 limpa para o motorista.
+12. Dashboard mostra resumo do roteiro de hoje e previsão dos próximos dias.
+
+IMPORTANTE
+- Esta é uma versão TESTE.
+- A atualização não deve substituir data/ nem backups/.
+- Planilha e Pipeline antigos continuam preservados internamente para compatibilidade, mas foram retirados do menu principal.
+- Não foram adicionados mapas nem rotas GPS.
+
+TESTE RECOMENDADO
+- Abra o C4U em duas máquinas.
+- Cadastre/edite um Lead em uma delas e confirme a atualização na outra.
+- Crie um roteiro para hoje com uma retirada e uma entrega.
+- Confira os itens no Calendário.
+- Imprima o roteiro.

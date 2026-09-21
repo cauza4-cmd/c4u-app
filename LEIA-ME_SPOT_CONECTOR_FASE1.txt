@@ -1,0 +1,84 @@
+C4U APP v16.0.6-spot.1 — SPOT / STRICKER: CONECTOR REST FASE 1
+=============================================================
+BASE OBRIGATÓRIA: v16.0.6-test.1 (cópia enviada pelo proprietário em 18/09/2026).
+
+ENTREGA E LIMITAÇÕES
+- Conector REST HTTPS no backend Node.js, sem dependências adicionais e sem PHP.
+- Configuração segura de chave exclusivamente no servidor (arquivo 0600 ou variável SPOT_ACCESS_KEY).
+- Área em Integrações > SPOT visível apenas para administrador.
+- Botões para testar autenticação/token e pré-visualizar feeds.
+- Catálogo, variações, preços, cores, estoque e personalizações: SOMENTE LEITURA nesta fase.
+- Não importa, não sincroniza, não apaga produtos, não altera preços, não envia pedidos.
+- Nenhuma credencial ou token da SPOT é incluído no ZIP ou devolvido ao navegador.
+- Não foi possível validar respostas autenticadas reais: será necessário chave NOVA e teste na AWS.
+- No teste inicial da AWS, HTTP 200 no endpoint sem chave provou apenas conectividade, não login.
+- Somente enviar pedidos à SPOT após homologação de formatos, preços, permissões e modo TEST.
+
+ARQUIVOS DO ZIP (aplicar na RAIZ de C4U APP)
+ server.js                       rotas restritas ao Administrador
+ lib/spot-connector.js          conector de autenticação/consulta
+ public/app.js                  painel de Integrações
+ public/index.html              inclui um CSS separado
+ public/c4u-spot.css             SOMENTE estilos do painel SPOT
+ tests/spot-connector.js        testes sem acesso real à SPOT
+ package.json e package-lock.json   versão 16.0.6-spot.1, sem novas dependências
+ LEIA-ME_SPOT_CONECTOR_FASE1.txt
+
+SE NÃO FOR MAIS v16.0.6-test.1, NÃO APLIQUE ESTE ZIP SOBRE VERSÃO DIFERENTE.
+Não instale pacote completo nem altere data/db.json para integrar API.
+
+ETAPA A — CONFIGURAR CHAVE NOVA, SEM SALVAR NO HISTÓRICO DO SHELL
+Solicite à SPOT a rotação da chave compartilhada na conversa. No SSH DA AWS,
+execute estes comandos um por vez; ao executar o comando read, digite a chave
+nova quando o terminal solicitar. A entrada fica oculta; não a cole no comando:
+
+umask 077; mkdir -p /home/admin/.config/c4u; chmod 700 /home/admin/.config/c4u
+read -r -s -p 'Nova Access Key SPOT: ' SPOT_KEY; echo
+printf '%s' "$SPOT_KEY" > /home/admin/.config/c4u/spot-access-key; unset SPOT_KEY; chmod 600 /home/admin/.config/c4u/spot-access-key
+
+O serviço PM2 deve rodar como usuário admin, como nas capturas anteriores.
+A credencial deve permanecer FORA da pasta pública e do ZIP do projeto.
+
+ETAPA B — ENVIAR ZIP
+No POWERSHELL do Windows (ajuste Downloads/chave se necessário):
+scp -o IdentitiesOnly=yes -i "$HOME\Downloads\LightsailDefaultKey-us-east-1.pem" "$HOME\Downloads\C4U_APP_v16.0.6_SPOT_FASE1_ATUALIZACAO.zip" admin@c4usystem.ddns.net:/home/admin/c4u-spot-update.zip
+
+ETAPA C — CONFERIR VERSÃO, BACKUP E ATUALIZAR
+No terminal da AWS, linha por linha. Agende manutenção, outros usuários fora:
+cd "/home/admin/c4u/C4U APP" && node -p "require('./package.json').version"
+unzip -tq /home/admin/c4u-spot-update.zip
+unzip -l /home/admin/c4u-spot-update.zip
+pm2 stop c4u
+tar -czf "/home/admin/c4u-backup-antes-spot-$(date +%Y%m%d-%H%M%S).tar.gz" -C /home/admin/c4u "C4U APP"
+unzip -o /home/admin/c4u-spot-update.zip -d "/home/admin/c4u/C4U APP"
+cd "/home/admin/c4u/C4U APP"
+node --check server.js && node --check public/app.js && node tests/spot-connector.js
+pm2 restart c4u --update-env
+pm2 status
+pm2 logs c4u --lines 20
+
+Não execute npm run verify contra seu banco real: os testes antigos esperam
+quantidades fixas do banco de DEMONSTRAÇÃO. O teste isolado SPOT acima não usa db.
+Se houver falha, não continue: use o backup para restaurar com o servidor parado.
+
+ETAPA D — VALIDAR NO NAVEGADOR
+Entrar como ADMIN > Configurações / Integrações > painel SPOT.
+1) Botão Testar autenticação: deve validar sessão. Se der erro, anote SÓ a mensagem,
+   nunca o token, URL com accessKey ou a chave.
+2) Selecionar Products, OptionalsComplete, Colors, Stocks e consultar prévia.
+3) Conferir as colunas e exemplos de SKU, referência, nome, cor, preço e estoque.
+4) Informar quais feeds são reconhecidos e quais campos recebidos sem dados sensíveis.
+O conector não sincroniza produto nenhum nesta fase: mapeamento real precisa ser
+validado para não duplicar imagens, trocar cores ou substituir preços errados.
+
+PRIVACIDADE / SEGURANÇA
+- Todos os endpoints exigem sessão autenticada e cargo Administrador.
+- Chave não é armazenada no banco C4U nem incorporada no browser.
+- HTTPS com domínio fixo e redirects desabilitados.
+- Token apenas em memória do processo e renovação após até 20h / erro de sessão.
+- A API usa parâmetros de query para autenticar. Não habilite logs de URLs
+  completas de requisições externas; não compartilhe logs com tokens.
+- O formulário HTTP aberto previamente sem chave retornou 200; NÃO implica
+  que o acesso real esteja habilitado.
+
+NENHUMA MODIFICAÇÃO FOI FEITA NA AWS POR ESTA ENTREGA.

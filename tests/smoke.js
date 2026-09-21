@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {upgrade}=require('../lib/upgrade');
+const root=path.resolve(__dirname,'..'),db=JSON.parse(fs.readFileSync(path.join(root,'data/db.json'),'utf8'));
+assert.equal(db.clients.length,1148,'Quantidade importada de clientes');
+assert.equal(db.itemLibrary.length,1386,'Quantidade importada de produtos');
+assert.equal(db.users.filter(u=>u.active!==false).length,7,'Sete usuários ativos');
+assert.equal(new Set(db.users.filter(u=>u.active!==false).map(u=>u.login.toLowerCase())).size,7,'Logins únicos');
+assert(db.users.every(u=>!u.password&&u.passwordSalt&&u.passwordHash),'Credenciais não devem estar em texto puro');
+assert.equal(db.itemLibrary.filter(x=>x.images&&x.images.length).length,1386,'Referências de imagens');
+const temp=structuredClone(db),result=upgrade(temp,{clients:JSON.parse(fs.readFileSync(path.join(root,'import-data/clients.json'))),products:JSON.parse(fs.readFileSync(path.join(root,'import-data/products.json')))});
+assert.equal(result.clients.created,0,'Importação de clientes repetida');assert.equal(result.products.created,0,'Importação de itens repetida');
+const source=fs.readFileSync(path.join(root,'server.js'),'utf8'),start=source.indexOf('function calcQuote('),end=source.indexOf('function pricingRequestGuard(');
+assert(start>=0&&end>start,'Função precificação presente');const pricing=new Function('const num=v=>Number(v||0);'+source.slice(start,end)+'\nreturn calcQuote;')();
+const sample=pricing({items:[{qty:100,unitCost:35,personalizationUnit:1,freight:100,taxPercent:13,commissionMargin:3,profitMargin:30}],discountPercent:0});
+assert.equal(sample.items[0].unitPrice,68.52);assert.equal(sample.total,6852);assert(Math.abs(sample.realMargin-30)<0.02);
+console.log('APROVADO: 1.148 clientes, 1.386 produtos com referências de fotos, 7 logins únicos com hashes, importação idempotente e precificação R$ 68,52 / R$ 6.852,00.');
+console.log('ATENÇÃO: isto não substitui teste funcional no navegador, integração Asia/CNPJ, permissões completas ou ensaio na AWS.');

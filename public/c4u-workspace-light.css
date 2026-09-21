@@ -1,0 +1,272 @@
+/* C4U APP | v16.0.4 | Área interna: identidade clara e tranquila do login.
+   ESCOPO: TODAS as declarações visuais estão restritas a #appShell.
+   Sem mudanças de display, posição, altura, largura, grid, overflow, eventos ou IDs.
+   Arquivo independente: para reverter, retire SOMENTE este link do index.html.
+   Ordem: styles.css -> design-system.css -> c4u-premium.css (login) -> este arquivo.
+*/
+
+#appShell {
+  --p:#6025aa;
+  --p2:#7945c7;
+  --pl:#f1eaff;
+  --bg:#f9f7fd;
+  --surface:#fff;
+  --surface-2:#f7f4fd;
+  --surface-3:#eee8fa;
+  --text:#273047;
+  --muted:#6e7891;
+  --border:#e7e2f3;
+  --border-strong:#d1c5ea;
+  --sidebar-bg:#fff;
+  --sidebar-text:#41435e;
+  --sidebar-muted:#817992;
+  --shadow:0 8px 27px rgba(79,43,130,.045),0 1px 2px rgba(79,43,130,.025);
+  --radius:16px;
+  --radius-sm:10px;
+  color:var(--text);
+  background:var(--bg);
+}
+
+/* Shell: same navigation and spacing, just a calmer color layer. */
+/* Restore the existing topbar on desktop: legacy styles.css hides .topbar with !important,
+   whereas only the mobile breakpoint restores .classic-topbar. No markup or JS changed. */
+#appShell .classic-topbar { display:flex !important; }
+#appShell .classic-main {
+  background:radial-gradient(ellipse 67% 43% at 95% 0%,rgba(222,208,255,.25),transparent 72%),
+             linear-gradient(180deg,#fbfaff 0%,#f7f5fc 100%) !important;
+  color:var(--text);
+}
+#appShell .classic-sidebar {
+  background:linear-gradient(180deg,#fff 0%,#fdfcff 62%,#f8f5ff 100%) !important;
+  border-right:1px solid var(--border) !important;
+  box-shadow:5px 0 25px rgba(71,40,124,.035) !important;
+  color:var(--text) !important;
+}
+#appShell .classic-brand {border-color:var(--border) !important;}
+#appShell .brand-logo-wrap {
+  background:#fff !important;
+  box-shadow:0 3px 12px rgba(90,48,153,.055) !important;
+  border:1px solid var(--border) !important;
+}
+#appShell .classic-brand .brand-text strong{color:#45266d !important;}
+#appShell .classic-brand .brand-text small{color:#898098 !important;}
+#appShell .classic-sidebar .section-toggle{color:#756a89 !important;}
+#appShell .classic-sidebar .section-toggle:hover{background:#f7f3ff !important;color:#6025aa !important;}
+#appShell .classic-sidebar .nav-item{
+  color:#4d4960 !important;
+  border-radius:10px !important;
+  transition:background-color .16s ease,color .16s ease,border-color .16s ease !important;
+}
+#appShell .classic-sidebar .nav-item:hover {background:#f4efff !important;color:#59269f !important;transform:none !important;}
+#appShell .classic-sidebar .nav-item.active{
+  background:linear-gradient(100deg,#f1eaff,#f8f5ff) !important;
+  color:#5722a1 !important;
+  box-shadow:inset 0 0 0 1px #e7d9fb !important;
+}
+#appShell .classic-sidebar .nav-item.active::before {background:#7440c8 !important;}
+#appShell .classic-sidebar .nav-item.active .nav-svg{color:#642baa !important;}
+#appShell .classic-sidebar-footer{border-color:var(--border) !important;}
+#appShell .classic-sidebar-footer .user-chip b{color:#363047 !important;}
+#appShell .classic-sidebar-footer .user-chip small{color:#827990 !important;}
+#appShell .logout-btn{color:#63557b !important;}
+#appShell .logout-btn:hover{background:#f4efff !important;color:#59269f !important;}
+#appShell .classic-topbar{
+  background:rgba(255,255,255,.88) !important;
+  border-bottom:1px solid var(--border) !important;
+  box-shadow:0 3px 20px rgba(79,43,130,.025) !important;
+  backdrop-filter:blur(14px);
+}
+#appShell .classic-topbar h1{color:#273047 !important;}
+#appShell .classic-topbar p{color:#788098 !important;}
+#appShell .hamb{color:#655778 !important;}
+#appShell .hamb:hover{color:#6025aa !important;background:#f1ebfc !important;border-color:#e4d9f8 !important;}
+#appShell .global-search-wrap{
+  background:#fff !important;
+  border:1px solid #e2dbf0 !important;
+  border-radius:12px !important;
+  box-shadow:0 3px 11px rgba(73,35,133,.025) !important;
+}
+#appShell .global-search-wrap:focus-within{border-color:#a185d8 !important;box-shadow:0 0 0 3px rgba(96,37,170,.08) !important;}
+#appShell .global-search-wrap input{color:#273047 !important;}
+#appShell .global-search-wrap input::placeholder{color:#8b90a3;}
+#appShell .global-search-wrap kbd{background:#f7f3fd !important;border-color:var(--border) !important;color:#807393 !important;}
+#appShell .online-users-button,#appShell .top-profile-button {border-color:var(--border) !important;background:#fff !important;color:#4a415a !important;}
+#appShell .top-profile-copy b{color:#283247 !important;}
+#appShell .top-profile-copy small{color:#788098 !important;}
+#appShell .top-popover{background:#fff !important;border-color:var(--border) !important;box-shadow:0 18px 44px rgba(44,24,82,.13) !important;}
+#appShell .top-profile-popover button:hover,#appShell .top-notification-list>button:hover,#appShell .top-user-row:hover{background:#f7f3ff !important;}
+
+/* Content surfaces: preserve their DOM, grids and scroll containers. */
+#appShell .card,#appShell .panel,#appShell .page-card,
+#appShell .dash-kpi,#appShell .mini,#appShell .calc,
+#appShell .template-card,#appShell .picker-item,#appShell .check-field,
+#appShell .network-card,#appShell .route-item,#appShell .route-plan,
+#appShell .dossier-hero,#appShell .item-card,#appShell .modal-card,
+#appShell .prospecting-card,#appShell .pipe-card {
+  background:#fff !important;
+  color:var(--text) !important;
+  border-color:var(--border) !important;
+  border-radius:var(--radius) !important;
+  box-shadow:var(--shadow) !important;
+}
+#appShell .card:hover,#appShell .dash-kpi:hover{
+  border-color:#dcd1f2 !important;
+}
+#appShell .page-head h2,#appShell .page-head h3,#appShell .dash-welcome h2,
+#appShell .dash-panel-head h3 {color:#263047 !important;}
+#appShell .page-head p,#appShell .dash-welcome p,
+#appShell .dash-eyebrow,#appShell .dash-panel-kicker{color:#758098 !important;}
+#appShell .section-title,#appShell .dash-panel-head {border-color:var(--border) !important;}
+
+/* Dashboard shares login's lilac accent, without making every card a gradient. */
+#appShell .dash-kpi-icon{
+  background:#f1eaff !important;
+  border:1px solid #e7dcfa !important;
+  color:#672eb5 !important;
+  border-radius:12px !important;
+}
+#appShell .dash-kpi-icon.amber{background:#fff5e9 !important;color:#a76b1d !important;border-color:#f5e8d0 !important;}
+#appShell .dash-kpi-icon.green{background:#edf8f2 !important;color:#16754c !important;border-color:#daeee2 !important;}
+#appShell .dash-kpi-icon.blue{background:#edf4ff !important;color:#3c69a6 !important;border-color:#dbe8fa !important;}
+#appShell .dash-kpi strong,#appShell .dash-big-number strong,#appShell .dash-mini-metrics b{color:#293149 !important;}
+#appShell .dash-panel-head,#appShell .dash-order-head{background:#fcfbff !important;border-color:var(--border) !important;}
+#appShell .dash-order-row,#appShell .dash-agenda-row,#appShell .dash-message-row{border-color:var(--border) !important;}
+#appShell .dash-order-row:hover,#appShell .dash-agenda-row:hover,#appShell .dash-message-row:hover {background:#faf7ff !important;}
+#appShell .dashboard-command .command-lead{background:linear-gradient(120deg,#4e258a,#6730aa) !important;}
+#appShell .dashboard-command .command-metrics,#appShell .dashboard-command .command-metrics>div{background:#fff !important;border-color:var(--border) !important;}
+#appShell .dash-attention-strip.calm{background:#f0f9f4 !important;border-color:#d8ebdf !important;}
+
+/* Forms and action buttons; retain existing dimensions, interactivity and semantics. */
+#appShell .btn{border-radius:10px !important;}
+#appShell .btn-primary{
+  background:linear-gradient(105deg,#7c36db,#5b25ab) !important;
+  border-color:#6f2ec7 !important;
+  color:#fff !important;
+  box-shadow:0 5px 13px rgba(93,40,167,.11) !important;
+}
+#appShell .btn-primary:hover {filter:brightness(1.055);}
+#appShell .btn-light{background:#f8f5ff !important;color:#5b3587 !important;border-color:#e5dcf5 !important;}
+#appShell .btn-light:hover{background:#f0e9ff !important;}
+#appShell .search,#appShell .field input,#appShell .field select,
+#appShell .field textarea,#appShell .report-filters input,#appShell .report-filters select{
+  background:#fff !important;
+  border-color:#e2dded !important;
+  color:#283247 !important;
+  border-radius:10px !important;
+}
+#appShell .search:focus,#appShell .field input:focus,#appShell .field select:focus,#appShell .field textarea:focus,
+#appShell .report-filters input:focus,#appShell .report-filters select:focus{
+  border-color:#9e7cd9 !important;box-shadow:0 0 0 3px rgba(96,37,170,.085) !important;
+}
+#appShell .field label{color:#596179 !important;}
+#appShell :is(button,input,textarea,select,a):focus-visible{
+  outline:2px solid #8151cb !important;outline-offset:2px !important;
+}
+
+/* Data tables / prospecting / pipeline: no changes to overflow or position. */
+#appShell .table-wrap{background:#fff !important;border-color:var(--border) !important;border-radius:13px !important;box-shadow:var(--shadow) !important;}
+#appShell th{background:#f9f6fe !important;color:#5d5572 !important;border-bottom-color:#eae4f5 !important;}
+#appShell td{border-bottom-color:#eeeaf5 !important;}
+#appShell tbody tr:hover td {background:#fcfaff !important;}
+#appShell .stats{background:#fff !important;border-color:var(--border) !important;}
+#appShell .stats>.stat{border-color:var(--border) !important;background:#fff !important;}
+#appShell .stat .k{color:#70798e !important;}
+#appShell .pipe-col,#appShell .prospecting-pipe-col{
+  background:#f5f1fc !important;
+  border-color:#e5dcf2 !important;
+  border-radius:13px !important;
+}
+#appShell .prospecting-tabs,#appShell .communication-tabs{background:#f2edfa !important;border-color:var(--border) !important;border-radius:11px !important;}
+#appShell .prospecting-tabs button.active,#appShell .communication-tabs button.active{background:#fff !important;color:#5d2aa6 !important;box-shadow:0 2px 7px rgba(67,36,115,.06) !important;}
+#appShell .prospecting-grid th {background:#ede6f9 !important;color:#4f4268 !important;}
+#appShell .prospecting-grid tbody tr:nth-child(odd) td{background:#fdfcff !important;}
+
+/* Communication, dialogs, help: subtle consistency without altering layouts. */
+#appShell .chat-shell{border-color:var(--border) !important;border-radius:15px !important;}
+#appShell .chat-list{background:#faf8fe !important;border-color:var(--border) !important;}
+#appShell .chat-thread.active{background:#f0e8fc !important;color:#382650 !important;}
+#appShell .chat-message.mine{background:#6830b3 !important;color:#fff !important;}
+#appShell .chat-message:not(.mine){background:#f0edf6 !important;color:#29243a !important;}
+#appShell .chat-composer input,#appShell .chat-composer textarea{background:#fff !important;color:#283247 !important;border-color:#ded7ee !important;border-radius:10px !important;}
+#appShell .modal-card{box-shadow:0 30px 85px rgba(37,23,63,.18) !important;}
+#appShell .iris-panel{background:#fff !important;border-color:#e0d8ef !important;}
+#appShell .iris-header{background:linear-gradient(105deg,#5d2b9e,#713bc0) !important;}
+#appShell .iris-bubble{background:#6830b3 !important;}
+
+/* Preserve original print output: exported client documents must remain clean. */
+@media print{
+  #appShell .classic-main{background:#fff !important;}
+  #appShell .card,#appShell .panel,#appShell .page-card,#appShell .table-wrap,#appShell .dash-kpi{
+    background:#fff !important;box-shadow:none !important;
+  }
+}
+
+/* Dark mode remains supported: replace colors only, never structural properties. */
+html[data-theme="dark"] #appShell{
+  --p:#b292ee;--p2:#d0b5ff;--pl:#332643;--bg:#19131f;
+  --surface:#24202b;--surface-2:#2c2534;--surface-3:#332b3b;
+  --text:#f5effa;--muted:#b7acc3;--border:#463a51;--border-strong:#665475;
+  --sidebar-bg:#1b1523;--sidebar-text:#e4dced;--sidebar-muted:#aa9bb8;
+  --shadow:0 8px 24px rgba(0,0,0,.12);
+  color:var(--text);
+}
+html[data-theme="dark"] #appShell .classic-main{background:#19131f !important;color:#f5effa !important;}
+html[data-theme="dark"] #appShell .classic-sidebar{background:#1b1523 !important;border-color:#40334a !important;}
+html[data-theme="dark"] #appShell .classic-brand,#appShell .classic-sidebar-footer{border-color:#40334a !important;}
+html[data-theme="dark"] #appShell .classic-brand .brand-text strong,
+html[data-theme="dark"] #appShell .classic-sidebar-footer .user-chip b{color:#f5effa !important;}
+html[data-theme="dark"] #appShell .classic-sidebar .section-toggle,
+html[data-theme="dark"] #appShell .classic-sidebar .nav-item,
+html[data-theme="dark"] #appShell .logout-btn{color:#d7cce6 !important;}
+html[data-theme="dark"] #appShell .classic-sidebar .nav-item:hover{background:#30243d !important;color:#fff !important;}
+html[data-theme="dark"] #appShell .classic-sidebar .nav-item.active{background:#39284e !important;color:#eadbff !important;box-shadow:inset 0 0 0 1px #59436e !important;}
+html[data-theme="dark"] #appShell .classic-topbar{background:rgba(32,24,40,.96) !important;border-color:#40334a !important;}
+html[data-theme="dark"] #appShell .classic-topbar h1,
+html[data-theme="dark"] #appShell .top-profile-copy b{color:#f5effa !important;}
+html[data-theme="dark"] #appShell .classic-topbar p,
+html[data-theme="dark"] #appShell .top-profile-copy small{color:#b7acc3 !important;}
+html[data-theme="dark"] #appShell .global-search-wrap,
+html[data-theme="dark"] #appShell .online-users-button,
+html[data-theme="dark"] #appShell .top-profile-button{background:#2a2231 !important;border-color:#4b3d57 !important;color:#f5effa !important;}
+html[data-theme="dark"] #appShell .global-search-wrap input{color:#f5effa !important;}
+html[data-theme="dark"] #appShell .top-popover{background:#26202d !important;border-color:#4b3d57 !important;}
+html[data-theme="dark"] #appShell .card,html[data-theme="dark"] #appShell .panel,
+html[data-theme="dark"] #appShell .page-card,html[data-theme="dark"] #appShell .dash-kpi,
+html[data-theme="dark"] #appShell .mini,html[data-theme="dark"] #appShell .calc,
+html[data-theme="dark"] #appShell .template-card,html[data-theme="dark"] #appShell .picker-item,
+html[data-theme="dark"] #appShell .check-field,html[data-theme="dark"] #appShell .network-card,
+html[data-theme="dark"] #appShell .route-item,html[data-theme="dark"] #appShell .route-plan,
+html[data-theme="dark"] #appShell .dossier-hero,html[data-theme="dark"] #appShell .item-card,
+html[data-theme="dark"] #appShell .modal-card,html[data-theme="dark"] #appShell .prospecting-card,
+html[data-theme="dark"] #appShell .pipe-card{
+  background:#26202e !important;color:#f5effa !important;border-color:#463a51 !important;
+}
+html[data-theme="dark"] #appShell .page-head h2,html[data-theme="dark"] #appShell .page-head h3,
+html[data-theme="dark"] #appShell .dash-welcome h2,html[data-theme="dark"] #appShell .dash-panel-head h3,
+html[data-theme="dark"] #appShell .dash-kpi strong,html[data-theme="dark"] #appShell .dash-big-number strong,
+html[data-theme="dark"] #appShell .dash-mini-metrics b{color:#f5effa !important;}
+html[data-theme="dark"] #appShell .dash-panel-head,html[data-theme="dark"] #appShell .dash-order-head,
+html[data-theme="dark"] #appShell .dashboard-command .command-metrics,
+html[data-theme="dark"] #appShell .dashboard-command .command-metrics>div{background:#26202e !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell .search,html[data-theme="dark"] #appShell .field input,
+html[data-theme="dark"] #appShell .field select,html[data-theme="dark"] #appShell .field textarea,
+html[data-theme="dark"] #appShell .report-filters input,html[data-theme="dark"] #appShell .report-filters select{
+  background:#231c29 !important;color:#f5effa !important;border-color:#53425d !important;
+}
+html[data-theme="dark"] #appShell .table-wrap,html[data-theme="dark"] #appShell .stats,
+html[data-theme="dark"] #appShell .stats>.stat{background:#26202e !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell th,html[data-theme="dark"] #appShell .prospecting-grid th{background:#34283e !important;color:#d8c9ec !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell td{background:#26202e !important;color:#f5effa !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell tbody tr:hover td{background:#34283e !important;}
+html[data-theme="dark"] #appShell .pipe-col,html[data-theme="dark"] #appShell .prospecting-pipe-col,
+html[data-theme="dark"] #appShell .prospecting-tabs,html[data-theme="dark"] #appShell .communication-tabs{background:#211a28 !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell .prospecting-tabs button.active,
+html[data-theme="dark"] #appShell .communication-tabs button.active{background:#372943 !important;color:#f4eaff !important;}
+html[data-theme="dark"] #appShell .chat-list{background:#201926 !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell .chat-thread.active{background:#39264d !important;color:#f5effa !important;}
+html[data-theme="dark"] #appShell .chat-message:not(.mine){background:#362d40 !important;color:#f5effa !important;}
+html[data-theme="dark"] #appShell .chat-composer input,
+html[data-theme="dark"] #appShell .chat-composer textarea{background:#231c29 !important;color:#f5effa !important;border-color:#53425d !important;}
+html[data-theme="dark"] #appShell .iris-panel{background:#26202e !important;border-color:#463a51 !important;}
+html[data-theme="dark"] #appShell .btn-light{background:#34283e !important;color:#e7d5fb !important;border-color:#53425d !important;}
+html[data-theme="dark"] #appShell .field label{color:#d4c6e4 !important;}

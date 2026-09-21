@@ -1,0 +1,51 @@
+C4U APP — VISUAL CLARO E SEGURO PARA LOGIN | v16.0.3 (TESTE)
+
+BASE: C4U APP v16.0.1 TESTE LOCALHOST, anterior à atualização visual que provocou conflito.
+OBJETIVO: aparência clara, branca e lilás suave inspirada na referência do proprietário.
+
+O QUE MUDA
+- public/index.html: somente a seção #loginScreen e um link CSS no <head>.
+- public/c4u-premium.css: substituído por CSS novo e ISOLADO: todos os seletores miram #loginScreen.
+- A logo oficial existente é mantida; nenhuma imagem da referência externa é incorporada ao sistema.
+
+O QUE NÃO MUDA
+- server.js, public/app.js, styles.css, design-system.css, data/db.json, package.json.
+- IDs existentes do DOM, rotas, chamadas da API, autenticação, autorização, chat,
+  orçamento, pedidos, produtos, sincronização, banco de dados ou outras páginas.
+- Não foram criadas opções fictícias de login Google, recuperar senha ou lembrar acesso.
+
+TESTE LOCAL (ARQUIVO COMPLETO)
+1) Mantenha uma cópia do ZIP antigo em local seguro.
+2) Extraia C4U_APP_v16.0.3_LOGIN_CLARO_COMPLETO_TESTE.zip em NOVA pasta.
+3) Entre na subpasta "C4U APP" e execute TESTAR_LOCALHOST_3000.bat.
+4) Abra http://localhost:3000 e atualize forçando cache: Ctrl + F5.
+5) Verifique login, mudança para o dashboard, navegação, orçamento, chat,
+   notificações, calendário e celular. Não utilize o banco de distribuição
+   como substituto do banco real da AWS.
+
+ATUALIZAÇÃO LOCAL (PACOTE PEQUENO)
+1) Pare a aplicação Node/PM2 se estiver rodando.
+2) Faça cópia de segurança de public/index.html e public/c4u-premium.css antigos.
+3) Extraia o ZIP de atualização NA RAIZ DO PROJETO, onde está server.js,
+   de modo que ele sobrescreva apenas public/index.html e public/c4u-premium.css.
+4) Reinicie a aplicação e faça Ctrl + F5 no navegador.
+5) Se não gostar, restaure os dois arquivos salvos; não é preciso restaurar o banco.
+
+IMPORTANTE SOBRE A NUVEM
+A versão online não foi alterada aqui. Antes de atualizar a AWS, confirme qual
+versão do código está de fato instalada, faça backup independente de código,
+db.json, anexos e configurações; confirme que os arquivos existentes de login
+correspondem à base compatível; aplique os dois arquivos somente após homologação
+em ambiente separado. NUNCA envie o ZIP completo para a AWS nem sobrescreva o db.json.
+
+TESTES EXECUTADOS NA PREPARAÇÃO
+- Integridade dos ZIPs, parsing CSS, todos os IDs HTML preservados;
+- Conteúdo inteiro de #appShell idêntico ao da base v16.0.1;
+- CSS restrito a #loginScreen;
+- SHA de server.js, app.js, styles.css, design-system.css, package.json e db.json
+  conferidos com o pacote base;
+- node --check nos arquivos JS e testes automáticos existentes aprovados;
+- Renderização estática do login conferida em desktop 1440x900 e celular 390x844.
+
+LIMITAÇÃO: sem dependência express instalada, não houve autenticação ponta a ponta
+nem teste operacional completo de todos os módulos neste ambiente. Testar em localhost.

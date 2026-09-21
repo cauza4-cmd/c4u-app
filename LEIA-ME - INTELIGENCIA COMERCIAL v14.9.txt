@@ -1,0 +1,33 @@
+C4U APP v14.9 — INTELIGÊNCIA COMERCIAL
+
+Novidades:
+1. Histórico inteligente de preços
+   - Histórico automático a partir de orçamentos e pedidos.
+   - Último/menor custo, última/venda média, fornecedor e negociações.
+
+2. Aprovação do cliente por link
+   - Gere um link para cada orçamento.
+   - Layout opcional em imagem.
+   - Cliente pode aprovar ou solicitar alteração.
+   - Registro de nome, observação, data e status.
+   - O link funciona para dispositivos que conseguem acessar o servidor C4U.
+
+3. Dossiê completo do cliente
+   - Botão Dossiê na lista de Clientes.
+   - Faturamento, pedidos, orçamentos, ticket médio e última compra.
+   - Linha do tempo, arquivos e comunicações vinculadas.
+
+4. Central de Arquivos
+   - Arquivos vinculados a cliente, pedido ou orçamento.
+   - Categorias: Logos, Layouts, Financeiro, Documentos, Fotos e Outros.
+   - Versão e autor do anexo.
+   - Limite recomendado: 8 MB por arquivo nesta versão.
+
+5. Painel Executivo
+   - Exclusivo da gerência/Administrador.
+   - Faturamento, lucro estimado, margem, conversão e comparação mensal.
+   - Desempenho de vendedores, top clientes, produtos e radar da operação.
+
+ATUALIZAÇÃO SEGURA:
+Use o ZIP de atualização sobre a pasta atual do C4U. Ele NÃO contém data/ nem backups/.
+Feche o C4U antes de substituir os arquivos e reabra pelo INICIAR C4U SIST.bat.

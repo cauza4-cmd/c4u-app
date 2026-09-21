@@ -1,0 +1,51 @@
+C4U APP v16.0.1-test.1 - ENTREGA PARA TESTES INTERNOS - 16/09/2026
+===================================================================
+
+O ZIP COMPLETO é uma cópia de teste separada da v16.0 Cloud Ready. Ele inclui data/db.json NOVO de demonstração, 1.148 cadastros de clientes únicos e 1.386 itens importados da planilha. A planilha de clientes tinha uma entrada repetida; o sistema evita duplicação por documento. Todas as 1.386 fichas de produto possuem referências de imagens externas da planilha e custo do fornecedor, mas precisam de Internet para que os links de imagem abram. Não foram obtidos preços ao vivo da API Asia. Preços de venda permanecem editáveis.
+
+O ZIP DE ATUALIZAÇÃO inclui código, scripts, biblioteca de importação e os dados da planilha para migrar o banco EXISTENTE; deliberadamente NÃO contém data/db.json, backups, chaves nem senhas em texto puro. NÃO use o ZIP COMPLETO para atualizar a AWS, pois o banco do ZIP não contém os registros comerciais reais do seu servidor.
+
+1. TESTE NO WINDOWS (LOCALHOST:3000)
+- Extraia o ZIP COMPLETO para uma pasta própria, diferente do aplicativo oficial instalado.
+- Tenha Node.js instalado. Internet é necessária para a primeira instalação das dependências e para imagens hospedadas externamente.
+- Dê dois cliques em TESTAR_LOCALHOST_3000.bat. Se necessário, ele executa npm install --omit=dev.
+- Alternativa: abra PowerShell na pasta "C4U APP" e execute: npm install --omit=dev; em seguida: npm run start:local.
+- Antes de iniciar ou com o servidor parado, execute "npm run verify" para rodar os testes automatizados de dados, usuários e precificação.
+- Acesse http://localhost:3000 no navegador.
+- Entre com os logins e senhas individuais que você forneceu anteriormente. São sete contas ativas: Cauã (Caua), Gabriel (Gabriel), Marcos (marcos), Giovana (giovana), Gisele (gisele), Fabio (fabio), Karen (Karen). A senha da Giovana é a senha fornecida para ela; apenas o login foi alterado, porque "marcos" já pertence a Marcos e logins não podem se repetir.
+- Teste clientes, importação Excel, busca por Enter/lupa, cadastro CNPJ, Biblioteca, Orçamento, conversão em Pedido, estoque por cliente, Chat, calendário, relatório de Prospecção e atualizações entre duas sessões. A sincronização completa em todas as áreas não recebeu homologação ponta a ponta nesta entrega.
+- A importação de novos arquivos .xlsx está nas telas Clientes e Biblioteca de Itens e é permitida somente para Administrador. A importação é idempotente em documentos/códigos iguais.
+- Cálculo: custo total 37,00 por item (ex.: 35 produto + 1 personalização + 1 frete unitário), imposto 13%, comissão 3% e margem 30% = custo / 0,54 = 68,52 por unidade; para 100 unidades = 6.852,00. Desconto adicional reduz a margem real mostrada no orçamento.
+- Em Estoque físico registre proprietário, quantidade, reserva informada, imagens, descrição, preço e vínculo à Biblioteca. O sistema valida a propriedade ao inserir no Orçamento/Pedido, mas NÃO reserva ou baixa o saldo automaticamente. Valide o procedimento de expedição manual antes de operar estoque real.
+- CNPJ depende da disponibilidade do serviço público externo. A integração API Asia é opcional, ainda NÃO validada contra o serviço real. Imagens do Excel são links e dependem de servidores externos.
+- As senhas fornecidas são de teste e devem ser alteradas para senhas fortes antes de expor dados reais à Internet. Há informações de clientes dentro do ZIP COMPLETO: não publicar/distribuir este arquivo abertamente.
+
+2. ATUALIZAÇÃO ONLINE - AWS LIGHTSAIL (SOMENTE DEPOIS DE APROVAR O TESTE LOCAL)
+IMPORTANTE: o servidor conhecido do histórico atende em https://c4usystem.ddns.net, mas NÃO tivemos acesso SSH nem conferimos qual código/banco está realmente rodando agora. Estes passos exigem um operador autorizado, acesso SSH e janela de manutenção. Uma atualização altera usuários e dados reais; não execute se não tiver backup/restauração validados.
+A. No Windows, mantenha o ZIP original oficial guardado. Baixe o ZIP DE ATUALIZAÇÃO, não o ZIP COMPLETO. Abra PowerShell em uma pasta com o ZIP e envie usando sua chave SSH, ajustando caminhos:
+  scp -i "C:\CAMINHO\SUA-CHAVE.pem" "C:\CAMINHO\C4U_APP_v16.0.1_ATUALIZACAO_TESTE.zip" admin@c4usystem.ddns.net:/home/admin/c4u-update.zip
+B. Conecte-se: ssh -i "C:\CAMINHO\SUA-CHAVE.pem" admin@c4usystem.ddns.net
+C. Descubra a instalação real antes de continuar: pm2 status; cd "/home/admin/c4u/C4U APP"; pwd; ls -lah; ls -lah data/db.json; confirme que o servidor e o banco correspondem à instalação correta. Se C4U_DATA_DIR estiver configurado, confirme seu caminho. Se os caminhos forem diferentes, adapte TODOS os comandos de migração.
+D. Agende manutenção e interrompa gravações: pm2 stop c4u. Crie cópia COMPLETA fora da pasta ativa, sem sobrescrever cópias anteriores:
+  mkdir -p /home/admin/c4u-rollback
+  cp -a "/home/admin/c4u/C4U APP" "/home/admin/c4u-rollback/app-$(date +%Y%m%d-%H%M%S)"
+  cp -a "/home/admin/c4u/C4U APP/data/db.json" "/home/admin/c4u-rollback/db-$(date +%Y%m%d-%H%M%S).json"
+Se o banco estiver fora desta pasta, copie o banco real. Salve os uploads reais, configuração PM2/Nginx e backup externo/offsite protegido. TESTE que os backups podem ser lidos antes de continuar.
+E. Inspecione antes de extrair: unzip -l /home/admin/c4u-update.zip. O ZIP foi criado com server.js e public/ na raiz; NÃO contém data/db.json. Extraia para a pasta correta somente após conferir o destino:
+  unzip -o /home/admin/c4u-update.zip -d "/home/admin/c4u/C4U APP"
+F. Entre na pasta, valide JavaScript e dependências:
+  cd "/home/admin/c4u/C4U APP"
+  node --check server.js
+  node --check public/app.js
+  npm install --omit=dev --no-audit --no-fund
+G. Execute a migração SOMENTE sobre a base real: node scripts/apply-update.js. Se usar C4U_DATA_DIR, configure-o explicitamente também neste comando e no provisionamento. O script produz backup adicional, importa os 1.148 clientes e os 1.386 itens sem apagar cadastros, e repetições por código/documento não duplicam esses registros.
+H. Provisione exclusivamente os sete usuários: node scripts/provision-users.js. Digite as senhas quando solicitadas pelo terminal; elas não serão ecoadas. O script preserva IDs correspondentes e histórico, desativa contas fora da lista e registra novo backup. Giovana entra com login "giovana". Não digite senhas em argumentos de linha de comando, scripts ou registros compartilhados.
+I. Inicie e verifique: pm2 restart c4u --update-env (se não reiniciar um processo parado, use pm2 start c4u); pm2 status; pm2 logs c4u --lines 50; sudo nginx -t. Confirme login com sete perfis, Clientes, Biblioteca, cotações, links HTTPS, dados históricos, SSE/Chat e permissões. Ao concluir: pm2 save.
+J. Se algo falhar: pare c4u, preserve uma cópia de registros novos gerados desde o backup, restaure os arquivos do aplicativo da pasta de rollback e o banco apenas após avaliar mudanças posteriores; reinicie pm2 c4u e revalide. Evite sobrepor manualmente pastas de versões diferentes. Se o deploy atual divergiu da v16.0, interrompa e faça comparação de código primeiro.
+
+3. INTEGRAÇÃO ASIA IMPORT (OPCIONAL)
+A integração backend de TESTE usa `funcao= listarProdutos2` em POST HTTPS com paginação e exige APENAS no servidor as variáveis ASIA_API_KEY, ASIA_SECRET_KEY e, se necessário, ASIA_IMPORT_ENDPOINT. NÃO há qualquer valor de chave/segredo no ZIP, HTML ou frontend. Peça ao TI confirmação do método/endpoint e reemissão das credenciais compartilhadas antes de configurar. Endpoints somente para Administrador: GET /api/integrations/asia/status; POST /api/integrations/asia/test; POST /api/integrations/asia/sync (JSON opcional: {"pagina":1,"paginas":2}, limite 5 páginas/chamada). Foram implementados, mas a API real NÃO foi autenticada/testada nesta entrega; teste isoladamente e confira os preços manualmente. Nunca cole credenciais em URLs, prints, Git ou logs.
+
+4. ESCOPO E LIMITES DOS TESTES EFETUADOS NESTA ENTREGA
+Passaram: verificação de sintaxe de server.js e public/app.js, leitura das duas planilhas, 1.148 clientes sem duplicação, 1.386 itens importados, existência de referências de imagem em todos os itens, sete logins distintos com hash+salt, importação repetida sem novos registros, migração executada duas vezes em banco de EXEMPLO sem perder usuários originais, e fórmula de 68,52/6.852,00.
+NÃO foram executados testes completos de interface/navegador, de rede/Express em execução, API externa da Asia ou CNPJ, nem deploy AWS. O pacote é TESTE PARA HOMOLOGAÇÃO, não uma release auditada de produção. Sem importar credenciais para o ZIP, a API Asia não pode ser testada automaticamente.

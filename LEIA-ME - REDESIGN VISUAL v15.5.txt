@@ -1,0 +1,30 @@
+C4U APP v15.5 TESTE — REDESIGN VISUAL
+
+Objetivo
+Retirar a aparência de interface genérica/vibecoded sem alterar a lógica já construída.
+
+Direção adotada
+- Aplicativo interno de operação comercial da Toca dos Brindes.
+- Base neutra de “mesa de trabalho” e superfícies claras.
+- Roxo 4Z como acento de navegação e ação, não como decoração espalhada.
+- Sidebar escura e compacta, sem gradiente.
+- Tipografia: Bahnschrift para hierarquia e Aptos para leitura no Windows.
+- Cards com menos arredondamento e sombras; tabelas e listas ganham aparência de ferramenta operacional.
+- Dashboard deixa de ser uma grade genérica de cards e passa a ter uma área de comando com hierarquia própria.
+- Login em composição dividida com identidade 4Z.
+- Prospecção assume visual de planilha operacional; Roteiro assume visual de folha de despacho.
+- Chat com contraste e densidade mais profissionais.
+- Tema escuro mantido sem neon.
+- Animações usadas apenas em entrada/expansão/feedback; reduced-motion respeitado.
+
+Arquivos de interface alterados
+- public/index.html
+- public/app.js
+- public/styles.css (base preservada)
+- public/design-system.css (nova camada visual)
+- public/approval.html
+- package.json
+- server.js (identificação de versão)
+
+Importante
+Esta é uma versão TESTE visual. O pacote de atualização não contém data/ nem backups/.

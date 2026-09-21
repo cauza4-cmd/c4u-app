@@ -1,0 +1,1 @@
+FASE 1 SOMENTE LEITURA; sem importação, preços apenas informativos, credenciais apenas no servidor. Não publicar login/senha.

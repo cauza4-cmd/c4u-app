@@ -1,0 +1,16 @@
+/* Isolado: preço Só Marcas e telas de integração, sem mudanças nos mapas e outros módulos. */
+.c4u-somarcas-panel .c4u-somarcas-summary{display:grid;gap:7px;background:#f7f3ff;border:1px solid #ded3f3;border-radius:12px;padding:15px;margin:12px 0;font-size:12px;color:#382851}
+.c4u-somarcas-panel .c4u-somarcas-summary b{font-size:16px}
+.c4u-somarcas-preview-image{width:64px;height:64px;object-fit:contain;border-radius:8px;background:#fff;border:1px solid #ebe4f4}
+.c4u-somarcas-table-wrap{overflow-x:auto;max-width:100%}
+.c4u-somarcas-price-table{font-size:12px;width:100%;min-width:215px;border-collapse:collapse}
+.c4u-somarcas-price-table th,.c4u-somarcas-price-table td{padding:7px 8px;white-space:normal;text-align:left;border-bottom:1px solid #eae4f5}
+.c4u-somarcas-price-table td:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.c4u-somarcas-confirm{border:1px solid #d9c9ee;border-radius:12px;padding:16px;margin:16px 0;background:#fff;display:grid;gap:10px}
+.c4u-somarcas-confirm label,.c4u-somarcas-choose-label{display:grid;gap:6px;font-size:12px;font-weight:650}
+.c4u-somarcas-confirm input,.c4u-somarcas-choose-label input,.c4u-somarcas-choose-label select{width:100%;border:1px solid #cec2df;border-radius:9px;padding:10px;background:#fff;color:#231933}
+.c4u-somarcas-choice{max-width:670px;width:min(92vw,670px);max-height:87vh;overflow:auto;display:grid;gap:12px;padding:22px}
+.c4u-somarcas-choice p{margin:2px 0;font-size:12px;line-height:1.5}
+.c4u-somarcas-warning{border-left:3px solid #d59e40;padding:8px 10px;background:#fffbf0;color:#6b511c}
+.c4u-somarcas-choice .form-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+@media(max-width:600px){.c4u-somarcas-choice{padding:14px}.c4u-somarcas-choice .form-actions button{flex:1}}

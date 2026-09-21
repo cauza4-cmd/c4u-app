@@ -1,0 +1,2 @@
+C4U APP v14.7 - versão completa com Chat interno.
+Para uso em rede, inicie pelo arquivo INICIAR C4U SIST.bat.

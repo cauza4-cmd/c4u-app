@@ -1,0 +1,20 @@
+C4U APP v16.0.8-performance.1-test.1
+
+ARQUIVO DE RELEASE
+- Não inclui node_modules.
+- Não inclui backups históricos.
+- Não inclui credenciais privadas.
+- O deploy NÃO deve sobrescrever o data/db.json atual do servidor.
+- O script scripts/apply-v1608.js altera somente itemLibrary e cria backup automático.
+
+CORREÇÕES
+1. Biblioteca: imagens confinadas no bloco da foto; texto não sobrepõe a imagem.
+2. Servidor: db.json fica em cache na memória e só é relido quando muda.
+3. Navegação: bootstrap único para aquecer o cache do navegador.
+4. Dashboard: primeira renderização não espera o bootstrap completo.
+5. Troca de abas/categorias: atualização em segundo plano, sem bloquear a navegação.
+6. Catálogo unificado: cache curto das buscas.
+7. Biblioteca funcional: 1.386 itens restaurados sem substituir clientes, pedidos, orçamentos, chat ou catálogos de fornecedores.
+
+DEPLOY
+Ver as instruções enviadas junto com o release. Faça sempre backup antes de trocar o código.

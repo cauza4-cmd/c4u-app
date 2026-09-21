@@ -1,0 +1,66 @@
+C4U APP | ATUALIZAÇÃO VISUAL CLARA v16.0.4 (TESTE LOCAL)
+
+BASE EXATA: C4U_APP_v16.0.3_LOGIN_CLARO_COMPLETO_TESTE.zip
+IDENTIDADE: branca, lilás suave e roxo discreto (referência de login aprovada).
+ESTA É UMA REVISÃO VISUAL SOBRE A BASE v16.0.1-test.1. package.json permanece no
+número original: não há nova release funcional, alteração de banco ou migração.
+
+O QUE MUDOU
+- Login fixado na altura da janela, sem rolagem de página em resoluções usuais.
+  Em telas excepcionalmente baixas (<560px no mobile / <590px no desktop),
+  a própria tela pode rolar para não ocultar campos e botão de acesso.
+- Textos: “Acesse o sistema”; removida frase “Entre no C4U APP” e removido bloco
+  “C4U APP / Sistema de gestão” debaixo da marca na tela de login.
+- Slogan na apresentação: “Operação comercial, do primeiro contato à entrega.”
+- Novo CSS independente public/c4u-workspace-light.css: visual claro aplicado à
+  sidebar, topbar, dashboard, botões, formulários, tabelas, módulos e chat.
+- Tema escuro preservado e cores específicas definidas para manter contraste.
+- A topbar existente volta a aparecer também no desktop: uma antiga regra global
+  a escondia; a restauração foi restrita a #appShell .classic-topbar.
+
+ARQUIVOS ALTERADOS
+1. public/index.html: textos da tela de login e novo link de stylesheet;
+2. public/c4u-premium.css: regras EXCLUSIVAS para #loginScreen e bloqueio
+   condicional de scroll do body quando #loginScreen está visível;
+3. public/c4u-workspace-light.css: arquivo NOVO, isolado em #appShell;
+4. este arquivo LEIA-ME (apenas documentação).
+
+Não foram alterados server.js, public/app.js, styles.css, design-system.css,
+package.json, data/db.json, import-data, usuários, senhas, imagens, integrações,
+permissões, cálculos, SSE, API, rotas ou regras de negócio.
+
+TESTAR O ZIP COMPLETO NO WINDOWS
+1. Pare uma cópia local antiga na porta 3000 (Ctrl+C na janela dela).
+2. Extraia o ZIP completo em uma PASTA NOVA, sem misturar versões.
+3. Entre na pasta "C4U APP".
+4. Execute TESTAR_LOCALHOST_3000.bat; requer Node.js instalado.
+5. Abra http://localhost:3000 e pressione Ctrl+F5 para limpar CSS em cache.
+6. Faça login; navegue pelo dashboard, orçamento, clientes, biblioteca, estoque,
+   chat e relatórios; teste tema claro/escuro, menus e responsividade.
+7. Não exponha publicamente o ZIP completo: ele inclui banco de teste e cadastros.
+
+APLICAR SOMENTE O ZIP DE ATUALIZAÇÃO EM UMA CÓPIA LOCAL COMPATÍVEL
+1. Confirme que está usando a v16.0.3 desta conversa.
+2. Pare o servidor e faça cópia de public/index.html e public/c4u-premium.css.
+3. Extraia o ZIP de atualização na raiz que contém server.js. Ele NÃO contém
+   nem sobrescreve data/, backups/ ou arquivos de backend.
+4. Inicie TESTAR_LOCALHOST_3000.bat e faça Ctrl+F5.
+5. Para reverter, restaure os dois arquivos salvos e exclua
+   public/c4u-workspace-light.css. Nenhum banco precisa ser restaurado.
+
+ONLINE / AWS
+NÃO publique diretamente o ZIP completo. A versão atual da AWS precisa ser
+identificada e seu código/banco real preservados antes de qualquer mudança.
+Somente depois do teste local, compare public/index.html e CSS existentes na AWS
+com a base v16.0.3; se não corresponderem, NÃO substitua às cegas. Faça backup
+real de código, banco e uploads, teste numa cópia separada e tenha rollback.
+Esta entrega não fez alterações no servidor online.
+
+VERIFICAÇÕES DESTA ENTREGA
+- Testes de dados/precificação existentes executados via npm run verify.
+- Integridade dos ZIPs e comparação de hashes com a base v16.0.3.
+- Renderização estática Chromium em 1440x900,1366x768,390x844,375x667,320x568;
+  checados overflow do documento e visibilidade do botão de login.
+- Visual da área interna conferido em modo claro e escuro com dados ilustrativos.
+LIMITAÇÃO: sem Express instalado neste ambiente, não houve login REAL nem
+homologação funcional ponta a ponta de todos os módulos pelo backend.

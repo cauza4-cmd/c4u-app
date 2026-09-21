@@ -1,0 +1,18 @@
+/* Diálogos C4U - estilo consistente em todas as telas, inclusive aprovação pública. */
+.c4u-dialog-overlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(28,20,48,.57);backdrop-filter:blur(5px)}
+.c4u-dialog-panel{box-sizing:border-box;width:min(100%,490px);max-height:calc(100vh - 40px);overflow-y:auto;border-radius:18px;border:1px solid #e5dbf5;background:#fff;box-shadow:0 24px 80px rgba(32,22,57,.29);padding:26px;color:#282135;font:inherit}
+.c4u-dialog-title{margin:0 0 10px;font-size:20px;line-height:1.3;font-weight:750;color:#40216e}
+.c4u-dialog-message{margin:0 0 20px;line-height:1.55;font-size:14px;color:#443d4c;white-space:pre-wrap;overflow-wrap:anywhere}
+.c4u-dialog-input{box-sizing:border-box;width:100%;min-height:43px;padding:10px 12px;margin:-5px 0 20px;border-radius:9px;border:1px solid #bdb0d0;background:#fff;color:#291f37;font:inherit;font-size:14px}
+.c4u-dialog-input:focus-visible,.c4u-dialog-button:focus-visible{outline:3px solid #bea6ff;outline-offset:2px}
+.c4u-dialog-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:9px}
+.c4u-dialog-button{min-height:39px;border:1px solid #d6cce6;border-radius:10px;padding:9px 17px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.c4u-dialog-button:hover{transform:translateY(-1px);box-shadow:0 5px 13px rgba(75,45,125,.12)}
+.c4u-dialog-cancel,.c4u-dialog-copy{background:#f4f0fb;color:#523c79}
+.c4u-dialog-accept{background:#6533b2;color:white;border-color:#6533b2}
+@media(max-width:480px){.c4u-dialog-panel{padding:20px;border-radius:15px}.c4u-dialog-actions{justify-content:stretch}.c4u-dialog-button{flex:1}}
+[data-theme="dark"] .c4u-dialog-panel{background:#211a30;color:#f0eaf8;border-color:#584273}
+[data-theme="dark"] .c4u-dialog-title{color:#e1caff}
+[data-theme="dark"] .c4u-dialog-message{color:#e7dff0}
+[data-theme="dark"] .c4u-dialog-input{background:#30233f;color:#fff;border-color:#765c9b}
+[data-theme="dark"] .c4u-dialog-cancel,[data-theme="dark"] .c4u-dialog-copy{background:#392950;color:#f1e9ff;border-color:#735c95}

@@ -1,0 +1,12 @@
+C4U SPOT FASE 3 + v16.0.7 (HOMOLOGAÇÃO)
+
+Base requerida: C4U APP v16.0.6-spot.2 COM correção posterior de imagens e custo automático SPOT.
+Versão depois do ZIP: 16.0.7-spot.3-test.1.
+
+Inclui: sincronização SPOT estoque a cada 12 h e catálogo/preços a cada 24 h; status e execução administrativa manual; backup, controle de concorrência, validação de feeds, retenção dos últimos dados válidos após falha; permissões na conversão orçamento→pedido, lançamento financeiro idempotente, navegação com cache, criação/edição de mapa mental e erros HTTP da versão 16.0.7. Preserva preço automático por faixa da Fase 2, imagem por SKU, biblioteca manual, estoque físico e orçamentos salvos.
+
+Segurança: chamadas para SPOT apenas GET dos feeds autorizados; nenhuma rotina de compra no fornecedor. A chave continua no arquivo privado já configurado na AWS, não neste ZIP. O ZIP NÃO contém banco, data, uploads, anexos nem credenciais.
+
+ATENÇÃO: pacote de atualização incremental; NÃO contém sistema completo nem banco. Não instalar sobre v16.0.7 pura ou 18.x. Testes locais automatizados passaram com mocks/dados demonstrativos; integração real e visual deve ser homologada na AWS. Execute o guia externo GUIA_C4U_SPOT_FASE3_v16.0.7.txt, iniciando com backup completo após parar PM2. Na AWS execute somente npm run spot:verify; npm run verify legado pressupõe base demonstrativa.
+
+Agendamento: inicia 90 segundos após o serviço subir e verifica a cada cinco minutos; somente quando o catálogo SPOT já foi importado. 12/24 horas contadas desde último sucesso, com tentativas posteriores e sem execução concorrente. Retenção de backups de banco atual: no máximo 30 arquivos locais, conforme rotina legada. Não execute várias instâncias PM2 do mesmo backend/DB em paralelo.

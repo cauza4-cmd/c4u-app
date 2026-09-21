@@ -1,0 +1,14 @@
+C4U APP 16.0.7-spot.3.3-test.1 — CONSOLIDADO COMPATÍVEL COM AWS
+Gerado por comparação com o arquivo de código exportado da AWS pelo usuário.
+Falha anterior: PRECHECK esperava hash do app.js isolado da correção de custo Fase 2,
+mas a AWS possuía app.js da Fase 3 (hash 48f8fa79...). Corrigido com hash real,
+versão e verificações de 8 arquivos de código. Hash de personal JS também corrigido.
+Comparação: servidor, index, personal, approval, spot-catalog, spot-sync e package.json
+da AWS coincidiram com a base; app.js também coincide com a Fase 3.
+Mantidas: Fases 1/2/3 SPOT, custo automático, agenda 12h/24h, financeiro, banco,
+orçamentos históricos, estoque físico, módulos existentes e sem envio de compras à SPOT.
+Alterações: Biblioteca por fornecedor, busca única, mapas avançados, diálogos internos,
+prévia + limpeza manual limitada à origem exata Asia Import - planilha.
+Removidas do patch apenas restrições LOCAL_DEMO desnecessárias na AWS.
+ATENÇÃO: a limpeza NÃO é executada durante a instalação; requer prévia admin e confirmação.
+Não inclui banco de dados, credenciais, backups ou chaves. Testar/homologar antes de liberar.

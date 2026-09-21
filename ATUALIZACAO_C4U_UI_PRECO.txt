@@ -1,0 +1,31 @@
+C4U APP — Atualização UI + Composição de Preço
+Versão: 16.0.7-spot.3.3-somarcas.2-asia.1-xbz.1-ui.1-test.1
+
+Alterações incluídas:
+- Nova composição de preço editável.
+- Frete total rateado pela quantidade.
+- Gravação/personalização total rateada pela quantidade.
+- Despesas extras totais rateadas pela quantidade.
+- Imposto de compra editável.
+- Imposto de venda, BV e margem de lucro editáveis.
+- Total unitário exibido com 4 casas e total geral com 2 casas.
+- Minha Central reúne Favoritos, Meu bloco de notas e Meus lembretes.
+- CRM acessível dentro de Clientes; item CRM removido do menu principal.
+- Calendário duplicado removido do menu de Comunicação; permanece um único Calendário.
+- Login/Dashboard: Dashboard aparece antes da atualização completa do cache.
+- Navegação usa cache e atualização em segundo plano.
+- Caixa de Entrada com posicionamento corrigido.
+- Biblioteca: informações superiores reduzidas e modal de detalhes sem scroll da janela.
+
+Compatibilidade:
+- Itens/orçamentos antigos sem os novos campos continuam usando a fórmula anterior no backend até serem editados.
+- Novos orçamentos e itens com os campos de composição usam a nova fórmula.
+- Nenhum arquivo de data/db.json é incluído neste pacote.
+- Nenhum segredo/API key é incluído neste pacote.
+
+Validações executadas:
+- node --check server.js
+- node --check public/app.js
+- node --check public/c4u-personal-1606.js
+- teste de composição de preço: PRECO_COMPOSICAO_OK
+- teste de compatibilidade da fórmula antiga: 68,52 / 6.852,00

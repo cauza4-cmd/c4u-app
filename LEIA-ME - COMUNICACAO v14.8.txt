@@ -1,0 +1,25 @@
+C4U APP v14.8 — CENTRAL DE COMUNICAÇÃO
+
+NOVO NESTA VERSÃO
+- Chat interno mantido: conversas individuais, grupos, texto e imagens.
+- Nova Caixa de Entrada formal dentro da área Comunicação.
+- Pastas: Recebidos, Enviados, Importantes e Arquivados.
+- Nova comunicação com assunto, categoria, prioridade, destinatários, mensagem e imagem.
+- Opção "Exigir confirmação de ciência".
+- Remetente acompanha leitura e confirmação de ciência por destinatário.
+- Botão "Formalizar" nas mensagens do chat para transformar uma conversa em registro formal.
+- Resposta a comunicações recebidas.
+- Vínculo opcional com Cliente, Orçamento ou Pedido.
+- Notificações e contadores integrados.
+- Atualização em tempo real pelo mesmo servidor C4U.
+
+INSTALAÇÃO DA ATUALIZAÇÃO
+1. Feche a janela do servidor C4U.
+2. Faça uma cópia da pasta C:\C4U como segurança.
+3. Extraia o conteúdo da atualização sobre C:\C4U, confirmando a substituição dos arquivos.
+4. A atualização NÃO contém a pasta data, portanto não substitui sua base.
+5. Abra novamente INICIAR C4U SIST.bat.
+6. Entre em Comunicação > Chat e use as abas Conversas / Caixa de Entrada.
+
+OBSERVAÇÃO
+As imagens são armazenadas na base local do C4U em formato reduzido. Para grandes volumes de arquivos, uma versão futura deve migrar anexos para armazenamento em arquivos/banco dedicado.

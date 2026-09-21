@@ -1,0 +1,92 @@
+C4U APP v15.0 — ACESSOS, PRIVACIDADE E AUDITORIA
+
+OBJETIVO DESTA VERSÃO
+Esta versão consolida o cadastro oficial de usuários, reforça a privacidade do Chat e revisa o sistema de autorizações antes da fase final do C4U.
+
+1. CADASTRO OFICIAL DE ACESSOS
+- 5 contas oficiais ficam ativas após a migração automática.
+- Cauã permanece Administrador/Criador com acesso total.
+- Os quatro acessos comerciais ficam como Vendedor, com permissões comerciais definidas.
+- Usuários antigos que não pertencem à lista oficial são desativados, e não apagados, para preservar referências históricas em pedidos, orçamentos e auditoria.
+- Senhas são armazenadas como hash scrypt + salt. O arquivo do banco não grava a senha em texto puro.
+
+2. PRIVACIDADE DO CHAT
+- Cada usuário só recebe e visualiza conversas das quais faz parte.
+- Conversas individuais exigem que o usuário seja um dos participantes.
+- Grupos exigem que o usuário pertença ao grupo.
+- O Administrador não recebe acesso automático ao conteúdo de chats privados dos quais não participa.
+- A lista de pessoas disponível no Chat contém apenas usuários ativos.
+- A Caixa de Entrada formal é limitada ao remetente e aos destinatários.
+
+3. REVISÃO DAS AUTORIZAÇÕES
+Correções aplicadas:
+- Removido o antigo bypass que liberava Chat independentemente da permissão configurada.
+- Permissão vazia agora significa realmente nenhum módulo autorizado, em vez de herdar permissões do cargo.
+- Configurações básicas de identidade podem ser lidas após login para carregar a interface; alteração continua administrativa.
+- O carregamento inicial não falha mais quando um usuário não possui acesso a um endpoint administrativo.
+- O frontend carrega somente coleções autorizadas e trata falhas individuais sem derrubar a tela inteira.
+- Proteção ampliada para módulos recentes, incluindo Planilha, Histórico de Preços, Aprovações, Central de Arquivos, Painel Executivo, documentos, backups, auditoria e versões.
+- Um usuário comum não pode alterar o próprio cargo, ativação ou lista de permissões para se promover a Administrador.
+- Histórico de versões respeita a permissão do módulo de origem.
+- Informações internas de rede/presença ficam vinculadas às permissões administrativas correspondentes.
+
+4. DOIS USUÁRIOS CHAMADOS MARCOS
+Existem dois acessos comerciais com o mesmo nome de exibição. O sistema passou a vincular vendedor por ID único, mantendo o e-mail/login como identificador visual nos seletores. Isso evita atribuir orçamento ou pedido ao Marcos errado.
+
+5. AUDITORIA FUNCIONAL — MÓDULOS REVISADOS
+- Login, sessões e usuários
+- Autorizações por função/usuário
+- Chat e grupos
+- Caixa de Entrada / comunicações formais
+- Dashboard
+- Clientes / CRM / Dossiê
+- Fornecedores
+- Produtos e Biblioteca de Itens
+- Orçamentos e Pipeline
+- Histórico Inteligente de Preços
+- Aprovação do Cliente
+- Pedidos / produção
+- Financeiro
+- Pré-Notas
+- Planilha
+- Calendário e tarefas
+- Notificações
+- Central de Documentos e Editáveis
+- Central de Arquivos
+- Relatórios e Painel Executivo
+- Busca global
+- Auditoria, backups e histórico de versões
+- Presença em rede local
+
+6. PROBLEMAS IMPORTANTES ENCONTRADOS E CORRIGIDOS
+- Possível quebra do carregamento para vendedores causada por chamadas administrativas no refresh geral.
+- Possibilidade de autoelevação de privilégio por edição do próprio usuário.
+- Chat configurado como permitido mesmo quando a autorização dizia o contrário.
+- Seleção ambígua de vendedor quando duas contas possuem o mesmo nome.
+- Registro da auditoria de backup manual não persistia corretamente.
+- Leitura de versões sem validar a permissão da coleção original.
+
+7. PONTOS TÉCNICOS AINDA IMPORTANTES PARA A VERSÃO FINAL
+- O banco atual é um único arquivo JSON. É adequado para a equipe pequena atual, mas exige atenção conforme aumentarem volume e acessos simultâneos.
+- Sessões ficam em memória; ao reiniciar o servidor, os usuários precisam entrar novamente.
+- Imagens/anexos salvos em base64 podem aumentar bastante o tamanho do db.json ao longo do tempo.
+- A aprovação por link depende de o servidor estar acessível ao cliente no endereço usado para gerar o link.
+- A integração XBZ permanece como conector genérico até existirem documentação/credenciais oficiais da API.
+- Ainda é recomendável um teste de ponta a ponta no Windows real antes de declarar a versão 1.0 final.
+
+8. VALIDAÇÃO DESTA VERSÃO
+- server.js: verificação de sintaxe Node.
+- public/app.js: verificação de sintaxe Node.
+- package.json e data/db.json: validação JSON.
+- Teste direto dos handlers de login/autorização: realizado em ambiente isolado.
+- Todas as 5 contas oficiais: autenticação confirmada no teste isolado.
+- Senha incorreta: bloqueada.
+- Chat privado: usuário fora da conversa não recebeu acesso, inclusive Administrador não participante.
+- Tentativa de vendedor promover a própria conta: bloqueada.
+
+OBSERVAÇÃO DE TESTE
+O ambiente usado para revisão não executou o aplicativo completo com navegador + Express real no Windows. Portanto, os testes acima cobrem sintaxe, estrutura, migração e handlers de segurança, mas a homologação visual/final deve ser feita no computador onde o C4U é utilizado.
+
+9. LIMPEZA TÉCNICA COMPLEMENTAR
+- Declarações antigas duplicadas no frontend, acumuladas por versões anteriores, foram removidas mantendo apenas as implementações finais em uso.
+- O Dossiê do Cliente passou a respeitar a mesma privacidade da Caixa de Entrada: comunicações formais vinculadas ao cliente só aparecem para remetente/destinatários autorizados.

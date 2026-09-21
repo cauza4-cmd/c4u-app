@@ -1,0 +1,19 @@
+C4U APP v15.4 HOTFIX — LINKS DE APROVAÇÃO EM REDE
+
+PROBLEMA CORRIGIDO
+Quando o C4U era aberto no computador servidor usando http://localhost:3000 ou http://127.0.0.1:3000, o botão "Copiar link" criava um endereço com localhost/127.0.0.1. Em outro computador, "localhost" aponta para o próprio computador do cliente e não para o servidor C4U.
+
+CORREÇÃO
+- O servidor identifica os IPv4 da rede local e prioriza redes privadas e interfaces Wi-Fi/Ethernet reais.
+- /api/network-info fornece recommendedUrl e approvalBaseUrl.
+- Usuários autenticados podem consultar /api/network-info sem precisar da permissão Configurações.
+- Aprovações devolvem shareUrl completo no formato http://IP-DO-SERVIDOR:3000/aprovacao/TOKEN.
+- Se o C4U estiver aberto via localhost/127.0.0.1, o frontend troca automaticamente pelo endereço LAN recomendado.
+- Se o navegador já estiver acessando o C4U pelo IP da rede, esse endereço é preservado.
+- A tela Aprovações possui "Copiar link" e "Testar link".
+
+IMPORTANTE
+Este hotfix permite abrir o link em computadores/celulares que consigam acessar o servidor C4U pela mesma rede local. A máquina servidor precisa estar ligada, o C4U precisa estar rodando e a porta 3000 precisa estar liberada no Firewall. Para abrir o link fora da rede local (internet/4G/outra empresa), é necessário publicar o servidor com HTTPS/VPS ou configurar uma conexão externa segura.
+
+ATUALIZAÇÃO
+O ZIP de atualização não contém data/ nem backups/.

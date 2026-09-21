@@ -1,0 +1,4 @@
+Seguranca: nenhum arquivo data/db.json, .env, token, certificado, chave ou upload acompanha este ZIP.
+A limpeza depende de administrador, previa com validade de 15 min e texto exato LIMPAR PLANILHA.
+Versao esperada na AWS: 16.0.7-spot.3-test.1; public/app.js hash Fase 3 48f8fa79...; preço automático presente no próprio código.
+Se o PRECHECK falhar, nao substituir arquivos. Exportar codigo atual sem data/ e sem credenciais para mescla.

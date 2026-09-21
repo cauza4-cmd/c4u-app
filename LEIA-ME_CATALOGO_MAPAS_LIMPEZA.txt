@@ -1,0 +1,37 @@
+C4U APP v16.0.7-spot.3.2-test.1 | PATCH DE HOMOLOGACAO
+
+O PACOTE EH INCREMENTAL, PARA A INSTALACAO AWS v16.0.7-spot.3-test.1
+com a correcao do custo automatico da SPOT ja aplicada. NUNCA instalar
+sobre a versao de demonstração localhost. Use PRECHECK_C4U.sh antes.
+
+ENTREGAS:
+- Biblioteca: busca unificada SPOT/XBZ/Asia/So Marcas/Manuais, abas,
+  filtros categoria/subcategoria, imagens e variantes quando recebidas.
+- Orçamento: seletor unificado aprovado no prototipo local, custo SPOT
+  automatico mantido, valores ja salvos preservados.
+- Mapas mentais: versao aprovada (notas, formatos, dimensoes, conexoes livres).
+- Planilha de produtos: importacao XLSX de PRODUTOS desativada.
+- Admin: PREVIA e confirmacao de limpeza apenas de itemLibrary com
+  source EXATAMENTE 'Asia Import - planilha'. Exclui so itens sem vinculos
+  e sem edicoes; itens referenciados/editados viram inativos (arquivados).
+  Historico, planilhas gerais, estoque fisico, produtos manuais, API e
+  SPOT preservados. Faz backup do banco antes de gravar.
+- Proxima sincronizacao da API Asia identifica origem Asia Import - API,
+  sem sobrescrever produtos manuais ou antigos importados pela planilha.
+- SPOT: continua EXCLUSIVAMENTE para consultas e orcamentos. NENHUM
+  pedido de compra a SPOT foi implementado. Agenda 12h estoque / 24h catalogo.
+
+LIMITES:
+- Este pacote nao possui banco, uploads, chaves, tokens ou credenciais.
+- A limpeza NAO eh automatica. Admin revisa a previa e confirma manualmente.
+- O servidor em producao NAO foi acessado nem alterado pelo assistente.
+- As categorias SPOT sao aproveitadas de Type/SubType na proxima atualizacao
+  completa, quando estes campos vierem no feed; ate la itens existentes podem
+  aparecer em Sem categoria. Nao inventar categorias ausentes.
+- XBZ e So Marcas aparecem nas abas quando ja houver produtos dessas origens;
+  este patch nao cria conectores novos.
+- Nunca descompactar ZIP completo de localhost na AWS. Nao importar o DB demo.
+
+Leia GUIA_C4U_CATALOGO_MAPAS_LIMPEZA_AWS.txt antes de aplicar.
+
+DIÁLOGOS v3.3: confirmação, coleta de texto, notificações nas telas do C4U e aprovação pública por modal interno assíncrono; as ações aguardam confirmação e cancelamento interrompe a operação.

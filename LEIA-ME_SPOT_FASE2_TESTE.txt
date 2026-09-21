@@ -1,0 +1,66 @@
+C4U APP 16.0.6-spot.2 — SPOT FASE 2 / CATALOGO EXCLUSIVO PARA ORCAMENTOS
+=====================================================================
+BASE CONFIRMADA: c4u-spot-fase2-codigo.tar.gz enviado em 18/09/2026, package.json 16.0.6-spot.1, ja com correção financeira.
+
+O QUE ESTE PACOTE FAZ
+- Corrige as tabelas de prévia de cores, estoque, preços e variações, exibindo os campos específicos recebidos.
+- Cria etapa de conferência de cinco feeds: products, optionalsComplete, colors, stocks, optionalsPrice.
+- Vincula produto pai por ProdReference e variação/preço/estoque por SKU, com alertas de campos ausentes/duplicados.
+- Armazena somente após confirmação expressa do administrador em spotCatalog, separada de itemLibrary e physicalStock.
+- Não apaga o catálogo manual, nem remove SKUs antigos não encontrados na SPOT.
+- Exige uma confirmação de custo manual antes de adicionar uma variação ao orçamento; valores de YourPrice/PriceN são NÃO VALIDADOS e moeda não inferida.
+- Ao orçar imagem genérica do produto, não insere foto de outra cor automaticamente; só insere foto quando atribuída à variação.
+- Nenhuma chamada de compra: NÃO cria, envia, cancela ou altera pedidos na SPOT. Converter orçamento em pedido permanece função INTERNA do C4U.
+- Nenhum agendamento automático. Nova atualização exige nova prévia e confirmação.
+
+LIMITAÇÕES E VALIDAÇÃO OBRIGATÓRIA
+- Desenvolvido com base no código enviado e nos nomes de campos das capturas. NÃO tivemos acesso aos corpos completos reais dos feeds, somente às prévias.
+- Primeiro validar com amostra real se a SPOT entrega URLs HTTPS completas em MainImage/OptionalImage1/OptionalImage2; imagens relativas/HTTP são omitidas por segurança.
+- Conferir faixas de preço, moeda, condições comerciais, cores, SKU e eventual estoque por país. O custo não é importado automaticamente ao orçamento.
+- Os feeds precisam ter listas reconhecíveis, não vazias, com pelo menos 90% das variações consistentes.
+- A prévia é mantida apenas na memória do processo, vinculada ao administrador, expira em 25 minutos e desaparece se o PM2 reiniciar.
+- Testes automatizados usam dados FICTÍCIOS; teste funcional real no navegador e homologação da API são pendentes.
+- NÃO contém data/db.json, backups, token, senha, Access Key, PHP nem node_modules.
+
+INSTALAÇÃO: EXECUTAR SOMENTE APÓS TESTES E APROVAÇÃO DA FASE 2
+(1) WINDOWS / PowerShell: envie o ZIP para /home/admin/c4u-spot-phase2.zip com a chave SSH do Lightsail:
+scp -o IdentitiesOnly=yes -i "$HOME\Downloads\LightsailDefaultKey-us-east-1.pem" "$HOME\Downloads\C4U_APP_SPOT_FASE2_ATUALIZACAO_TESTE.zip" admin@c4usystem.ddns.net:/home/admin/c4u-spot-phase2.zip
+
+(2) TERMINAL AWS / Linux: confirme a BASE ativa e o ZIP:
+cd "/home/admin/c4u/C4U APP" && node -p "require('./package.json').version"
+unzip -tq /home/admin/c4u-spot-phase2.zip
+unzip -l /home/admin/c4u-spot-phase2.zip
+Se a versão NÃO for 16.0.6-spot.1, PARAR. Se o ZIP tiver data/ ou arquivos inesperados, PARAR.
+
+(3) Ainda na AWS: valide o pacote isoladamente sem tocar na instalação ativa:
+mkdir -p /home/admin/c4u-spot-phase2-stage
+unzip -oq /home/admin/c4u-spot-phase2.zip -d /home/admin/c4u-spot-phase2-stage
+node --check /home/admin/c4u-spot-phase2-stage/server.js
+node --check /home/admin/c4u-spot-phase2-stage/public/app.js
+node /home/admin/c4u-spot-phase2-stage/tests/spot-connector.js
+node /home/admin/c4u-spot-phase2-stage/tests/spot-phase2.js
+Se algum teste falhar, NÃO continuar.
+
+(4) Avise a equipe para sair do sistema. Na AWS, pare, faça backup e confira:
+pm2 stop c4u
+tar -czf "/home/admin/c4u-before-spot-phase2-$(date +%Y%m%d-%H%M%S).tar.gz" -C /home/admin/c4u "C4U APP"
+ls -lh /home/admin/c4u-before-spot-phase2-*.tar.gz
+Se backup falhar, use pm2 restart c4u para voltar e PARAR.
+
+(5) Ainda na AWS, aplique SOMENTE o ZIP incremental na raiz existente e valide:
+unzip -oq /home/admin/c4u-spot-phase2.zip -d "/home/admin/c4u/C4U APP"
+cd "/home/admin/c4u/C4U APP"
+node --check server.js && node --check public/app.js && npm run spot:verify
+Se erro, restaure backup antes de operar. NÃO execute npm run verify na AWS com banco real: testes legados esperam banco DEMO.
+
+(6) Reinicie e cheque:
+pm2 restart c4u --update-env
+pm2 status
+pm2 logs c4u --lines 30 --nostream
+
+(7) NAVEGADOR: use conta ADMIN, Configurações > Integrações > SPOT > Gerar prévia de importação.
+Confira totais, alertas, amostras (preços e imagens especialmente). Só então digite IMPORTAR SPOT e confirme.
+Depois em Orçamentos > Adicionar da Biblioteca > Buscar SPOT, busque caneta ou código, selecione variante, digite custo REAL confirmado e marque a confirmação. Teste salvamento do orçamento, sem enviar pedidos ao fornecedor.
+Se a prévia mostrar números estranhos, preço/moeda incorretos, imagens genéricas ou alertas demais: NÃO importar; envie apenas campos e exemplos não confidenciais.
+
+RECUPERAÇÃO: restaurar exclusivamente o backup coerente com a parada da aplicação, com PM2 parado; reiniciar e homologar. Não restaure automaticamente um banco antigo após novos registros terem sido gravados.
